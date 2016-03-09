@@ -2,8 +2,12 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
 
-    <!-- Common -->
-    <!--<preference for="Praxigento\Bonus\Hybrid\Lib\IToolbox"-->
-    <!--type="\Praxigento\Bonus\Hybrid\Lib\Tool\Box"/>-->
+    <!-- Repos -->
+    <preference for="Praxigento\Bonus\GlobalSales\Lib\Repo\IModule"
+                type="Praxigento\Bonus\GlobalSales\Lib\Repo\Def\Module"/>
+
+    <!-- Services -->
+    <preference for="Praxigento\Bonus\GlobalSales\Lib\Service\ICalc"
+                type="Praxigento\Bonus\GlobalSales\Lib\Service\Calc\Call"/>
 
 </config>

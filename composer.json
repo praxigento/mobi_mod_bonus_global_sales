@@ -15,11 +15,11 @@
       "src/registration.php"
     ],
     "psr-4": {
-      "Praxigento\\BonusGlobalSales\\": "src/"
+      "Praxigento\\BonusGlobalSales\\": "src/",
+      "Praxigento\\Bonus\\GlobalSales\\": "src/"
     }
   },
   "require": {
-    "praxigento/mobi_mod_common_bonus_global_sales": "dev-master",
     "praxigento/mobi_mod_mage2_bonus_loyalty": "dev-master"
   }
 }

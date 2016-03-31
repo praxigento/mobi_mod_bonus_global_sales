@@ -8,7 +8,7 @@ namespace Praxigento\BonusGlobalSales;
 
 use Praxigento\BonusLoyalty\Config as BonusLoyaltyCfg;
 
-class Config
+class Config extends \Praxigento\BonusBase\Config
 {
     /**
      * This module's calculation types.

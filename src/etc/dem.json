@@ -1,0 +1,121 @@
+{
+  "dBEAR": {
+    "package": {
+      "Praxigento": {
+        "alias": "prxgt",
+        "comment": "Root namespace for Praxigento modules.",
+        "package": {
+          "Bonus": {
+            "alias": "bon",
+            "comment": "Bonus related structures",
+            "package": {
+              "GlobalSales": {
+                "alias": "globsal",
+                "comment": "Global Sales bonus related structures.",
+                "entity": {
+                  "Qualification": {
+                    "alias": "qual",
+                    "comment": "ualification values (GV, rank) to bind to compressed downline tree.",
+                    "attribute": {
+                      "CompressId": {
+                        "alias": "compress_id",
+                        "comment": "Reference to the compressed tree item in bonus base table.",
+                        "nullable": false,
+                        "type": {"integer": {"unsigned": true}}
+                      },
+                      "GroupVolume": {
+                        "alias": "gv",
+                        "comment": "Qualified GV for the customer.",
+                        "nullable": false,
+                        "type": {"numeric": {"precision": 12, "scale": 4}}
+                      },
+                      "RankId": {
+                        "alias": "rank_id",
+                        "comment": "Reference to the max qualified rank item in bonus base table.",
+                        "nullable": false,
+                        "type": {"integer": {"unsigned": true}}
+                      }
+                    },
+                    "index": {
+                      "primary": {"type": "primary", "aliases": ["compress_id"]}
+                    },
+                    "relation": {
+                      "toRank": {
+                        "own": {"aliases": ["rank_id"]},
+                        "reference": {
+                          "entity": {"completeAlias": "prxgt_bon_base_rank"},
+                          "aliases": ["id"]
+                        },
+                        "action": {"delete": "restrict", "update": "restrict"}
+                      }
+                    }
+                  }
+                },
+                "package": {
+                  "Config": {
+                    "alias": "cfg",
+                    "comment": "Configuration parameters for Global Sales bonus.",
+                    "entity": {
+                      "Param": {
+                        "alias": "param",
+                        "comment": "Calculation parameters (GV, percent) for Global Sales bonus.",
+                        "attribute": {
+                          "RankId": {
+                            "alias": "rank_id",
+                            "comment": "Reference to the rank item in bonus base table.",
+                            "nullable": false,
+                            "type": {"integer": {"unsigned": true}}
+                          },
+                          "GroupVolume": {
+                            "alias": "gv",
+                            "comment": "GV value for the customer.",
+                            "nullable": false,
+                            "type": {"numeric": {"precision": 12, "scale": 4}}
+                          },
+                          "LegMaxPercent": {
+                            "alias": "leg_max_percent",
+                            "comment": "Maximal percent from one leg for qualification to calculate GV (0.00 - 1.00).",
+                            "nullable": false,
+                            "default": 1.00,
+                            "type": {"numeric": {"precision": 5, "scale": 4}}
+                          },
+                          "Percent": {
+                            "alias": "percent",
+                            "comment": "Percent to apply to calculate bonus.",
+                            "nullable": false,
+                            "default": 0,
+                            "type": {"numeric": {"precision": 5, "scale": 4}}
+                          },
+                          "IsProrated": {
+                            "alias": "is_prorated",
+                            "comment": "Is this rank share bonus equally or pro-rated.",
+                            "nullable": false,
+                            "default": true,
+                            "type": {"boolean": {}}
+                          }
+                        },
+                        "index": {
+                          "primary": {"type": "primary", "aliases": ["rank_id"]}
+                        },
+                        "relation": {
+                          "toRank": {
+                            "own": {"aliases": ["rank_id"]},
+                            "reference": {
+                              "entity": {"completeAlias": "prxgt_bon_base_rank"},
+                              "aliases": ["id"]
+                            },
+                            "action": {"delete": "restrict", "update": "restrict"}
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

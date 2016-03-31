@@ -6,7 +6,7 @@
  */
 namespace Praxigento\BonusGlobalSales;
 
-use Praxigento\Bonus\Loyalty\Lib\Config as BonusLoyaltyCfg;
+use Praxigento\BonusLoyalty\Config as BonusLoyaltyCfg;
 
 class Config
 {

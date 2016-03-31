@@ -6,10 +6,14 @@
  */
 namespace Praxigento\BonusGlobalSales\Setup;
 
-class InstallData extends \Praxigento\Core\Setup\Data\Base {
+use Magento\Framework\Setup\ModuleContextInterface;
+use Praxigento\Core\Setup\Data\SchemaSetupInterface;
 
-    public function __construct() {
-        parent::__construct('Praxigento\Bonus\GlobalSales\Lib\Setup\Data');
+class InstallData extends \Praxigento\Core\Setup\Data\Base {
+    protected function _setup(SchemaSetupInterface $setup, ModuleContextInterface $context)
+    {
+        // TODO: Implement _setup() method.
     }
+
 
 }

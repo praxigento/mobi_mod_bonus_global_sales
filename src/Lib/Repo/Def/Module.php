@@ -12,7 +12,7 @@ use Praxigento\Bonus\GlobalSales\Lib\Entity\Qualification;
 use Praxigento\Bonus\GlobalSales\Lib\Repo\decimal;
 use Praxigento\Bonus\GlobalSales\Lib\Repo\IModule;
 use Praxigento\Bonus\Loyalty\Lib\Repo\IModule as BonusLoyaltyRepo;
-use Praxigento\Core\Lib\Repo\Base;
+use Praxigento\Core\Lib\Repo\Def\Base;
 use Praxigento\Pv\Lib\Entity\Sale as PvSale;
 
 class Module extends Base implements IModule {
@@ -81,7 +81,7 @@ class Module extends Base implements IModule {
     public function getConfigParams() {
         $result = [ ];
         $order = Param::ATTR_GV . ' ASC';
-        $data = $this->_repoBasic->getEntities(Param::ENTITY_NAME, null, null, $order);
+        $data = $this->_resourceConnection->getEntities(Param::ENTITY_NAME, null, null, $order);
         foreach($data as $item) {
             $rankId = $item[Param::ATTR_RANK_ID];
             $result[$rankId] = $item;
@@ -147,7 +147,7 @@ class Module extends Base implements IModule {
         $isCommited = false;
         try {
             foreach($updates as $item) {
-                $this->_repoBasic->addEntity(Qualification::ENTITY_NAME, $item);
+                $this->_resourceConnection->addEntity(Qualification::ENTITY_NAME, $item);
             }
             $conn->commit();
             $isCommited = true;

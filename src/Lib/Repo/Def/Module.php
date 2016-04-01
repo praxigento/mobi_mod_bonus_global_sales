@@ -12,7 +12,7 @@ use Praxigento\Bonus\GlobalSales\Lib\Entity\Qualification;
 use Praxigento\Bonus\GlobalSales\Lib\Repo\decimal;
 use Praxigento\Bonus\GlobalSales\Lib\Repo\IModule;
 use Praxigento\Bonus\Loyalty\Lib\Repo\IModule as BonusLoyaltyRepo;
-use Praxigento\Core\Lib\Repo\Def\Base;
+use Praxigento\Core\Repo\Def\Base;
 use Praxigento\Pv\Lib\Entity\Sale as PvSale;
 
 class Module extends Base implements IModule {

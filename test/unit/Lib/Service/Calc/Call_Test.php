@@ -35,8 +35,8 @@ class Call_UnitTest extends \Praxigento\Core\Lib\Test\BaseMockeryCase {
 
     protected function setUp() {
         parent::setUp();
-        $this->mConn = $this->_mockConnection();
-        $this->mDba = $this->_mockDba($this->mConn);
+        $this->mConn = $this->_mockDba();
+        $this->mDba = $this->_mockRsrcConnOld($this->mConn);
         $this->mRepoBasic = $this->_mockRepoBasic($this->mDba);
         $this->mRepoMod = $this->_mockRepoMod(
             \Praxigento\Bonus\GlobalSales\Lib\Repo\IModule::class,

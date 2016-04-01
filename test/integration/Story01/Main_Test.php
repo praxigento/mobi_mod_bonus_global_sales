@@ -4,7 +4,7 @@
  */
 namespace Praxigento\Bonus\GlobalSales\Lib\Test\Story01;
 
-use Praxigento\Accounting\Lib\Entity\Account;
+use Praxigento\Accounting\Data\Entity\Account;
 use Praxigento\Bonus\Base\Lib\Entity\Calculation;
 use Praxigento\Bonus\Base\Lib\Entity\Compress;
 use Praxigento\Bonus\Base\Lib\Entity\Rank;
@@ -147,7 +147,7 @@ class Main_IntegrationTest extends BaseIntegrationTest {
 
     private function _repoGetBalances() {
         $assetTypeId = $this->_repoAcc->getTypeAssetIdByCode(Cfg::CODE_TYPE_ASSET_WALLET_ACTIVE);
-        $where = Account::ATTR_ASSET_TYPE__ID . '=' . (int)$assetTypeId;
+        $where = Account::ATTR_ASSET_TYPE_ID . '=' . (int)$assetTypeId;
         $result = $this->repoBasic->getEntities(Account::ENTITY_NAME, null, $where);
         return $result;
     }

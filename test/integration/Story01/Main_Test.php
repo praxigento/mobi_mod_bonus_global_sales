@@ -58,17 +58,17 @@ class Main_IntegrationTest extends BaseIntegrationTest {
     private $_repoAcc;
     /** @var \Praxigento\Bonus\Base\Lib\Repo\IModule */
     private $_repoBase;
-    /** @var \Praxigento\Core\Lib\Repo\IBasic */
+    /** @var \Praxigento\Core\Repo\IBasic */
     private $repoBasic;
 
     public function __construct() {
         parent::__construct();
-        $this->_callGlobalSalesCalc = $this->_obm->get(\Praxigento\Bonus\GlobalSales\Lib\Service\ICalc::class);
-        $this->_callLoyaltyCalc = $this->_obm->get(\Praxigento\Bonus\Loyalty\Lib\Service\ICalc::class);
-        $this->_callPvSale = $this->_obm->get(\Praxigento\Pv\Lib\Service\ISale::class);
-        $this->repoBasic = $this->_obm->get(\Praxigento\Core\Lib\Repo\IBasic::class);
-        $this->_repoBase = $this->_obm->get(\Praxigento\Bonus\Base\Lib\Repo\IModule::class);
-        $this->_repoAcc = $this->_obm->get(\Praxigento\Accounting\Lib\Repo\IModule::class);
+        $this->_callGlobalSalesCalc = $this->_manObj->get(\Praxigento\Bonus\GlobalSales\Lib\Service\ICalc::class);
+        $this->_callLoyaltyCalc = $this->_manObj->get(\Praxigento\Bonus\Loyalty\Lib\Service\ICalc::class);
+        $this->_callPvSale = $this->_manObj->get(\Praxigento\Pv\Lib\Service\ISale::class);
+        $this->repoBasic = $this->_manObj->get(\Praxigento\Core\Repo\IBasic::class);
+        $this->_repoBase = $this->_manObj->get(\Praxigento\Bonus\Base\Lib\Repo\IModule::class);
+        $this->_repoAcc = $this->_manObj->get(\Praxigento\Accounting\Lib\Repo\IModule::class);
     }
 
     private function _calcBonus() {

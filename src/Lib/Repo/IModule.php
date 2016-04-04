@@ -5,7 +5,8 @@
 
 namespace Praxigento\Bonus\GlobalSales\Lib\Repo;
 
-interface IModule  extends \Praxigento\Core\Lib\Repo\IModule {
+interface IModule
+{
 
     /**
      * Decorator for \Praxigento\Bonus\Base\Lib\Repo\IModule::getCompressedTree
@@ -34,7 +35,7 @@ interface IModule  extends \Praxigento\Core\Lib\Repo\IModule {
     /**
      * Adapter for \Praxigento\Bonus\Base\Lib\Repo\Def\Module::getCalcsForPeriod
      *
-     * @param int    $calcTypeId
+     * @param int $calcTypeId
      * @param string $dsBegin 'YYYYMMDD'
      * @param string $dsEnd 'YYYYMMDD'
      *

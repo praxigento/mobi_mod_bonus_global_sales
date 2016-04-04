@@ -25,12 +25,12 @@ class Module extends Base implements IModule
     protected $_toolPeriod;
 
     public function __construct(
-        \Praxigento\Core\Repo\IBasic $repoBasic,
+        \Magento\Framework\App\ResourceConnection $resource,
         BonusBaseRepo $repoBonusBase,
         BonusLoyaltyRepo $repoBonusLoyalty,
         \Praxigento\Core\Lib\Tool\Period $toolPeriod
     ) {
-        parent::__construct($repoBasic);
+        parent::__construct($resource);
         $this->_toolPeriod = $toolPeriod;
         $this->_repoBonusBase = $repoBonusBase;
         $this->_repoBonusLoyalty = $repoBonusLoyalty;
@@ -85,7 +85,7 @@ class Module extends Base implements IModule
     {
         $result = [];
         $order = Param::ATTR_GV . ' ASC';
-        $data = $this->_resourceConnection->getEntities(Param::ENTITY_NAME, null, null, $order);
+        $data = $this->_resource->getEntities(Param::ENTITY_NAME, null, null, $order);
         foreach ($data as $item) {
             $rankId = $item[Param::ATTR_RANK_ID];
             $result[$rankId] = $item;
@@ -157,7 +157,7 @@ class Module extends Base implements IModule
         $isCommited = false;
         try {
             foreach ($updates as $item) {
-                $this->_resourceConnection->addEntity(Qualification::ENTITY_NAME, $item);
+                $this->_resource->addEntity(Qualification::ENTITY_NAME, $item);
             }
             $conn->commit();
             $isCommited = true;

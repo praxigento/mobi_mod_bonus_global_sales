@@ -21,12 +21,12 @@ class InstallSchema extends \Praxigento\Core\Setup\Schema\Base
 
         /* Cfg/ Param */
         $entityAlias = Param::ENTITY_NAME;
-        $demEntity = $demPackage['package']['Config']['entity']['Param'];
+        $demEntity = $demPackage->getData('package/Config/entity/Param');
         $this->_toolDem->createEntity($entityAlias, $demEntity);
 
         /* Qualification */
         $entityAlias = Qualification::ENTITY_NAME;
-        $demEntity = $demPackage['entity']['Qualification'];
+        $demEntity = $demPackage->getData('entity/Qualification');
         $this->_toolDem->createEntity($entityAlias, $demEntity);
     }
 

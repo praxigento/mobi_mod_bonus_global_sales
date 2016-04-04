@@ -8,7 +8,7 @@ namespace Praxigento\Bonus\GlobalSales\Lib\Service\Calc\Sub;
 use Praxigento\Bonus\Base\Lib\Entity\Compress;
 use Praxigento\Bonus\GlobalSales\Lib\Entity\Cfg\Param;
 use Praxigento\Bonus\GlobalSales\Lib\Entity\Qualification;
-use Praxigento\Pv\Lib\Entity\Sale as PvSale;
+use Praxigento\Pv\Data\Entity\Sale as PvSale;
 
 class Bonus {
     const AS_IS_PRORATED = 'isProrated';

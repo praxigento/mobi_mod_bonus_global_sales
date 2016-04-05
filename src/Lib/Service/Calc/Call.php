@@ -7,12 +7,13 @@ namespace Praxigento\Bonus\GlobalSales\Lib\Service\Calc;
 use Praxigento\Bonus\Base\Lib\Entity\Calculation;
 use Praxigento\Bonus\Base\Lib\Entity\Period;
 use Praxigento\Bonus\Base\Lib\Service\Period\Request\GetForDependentCalc as PeriodGetForDependentCalcRequest;
-use Praxigento\BonusGlobalSales\Config as Cfg;
 use Praxigento\Bonus\GlobalSales\Lib\Service\ICalc;
+use Praxigento\BonusGlobalSales\Config as Cfg;
 use Praxigento\Core\Lib\Service\Base\NeoCall as NeoCall;
 use Praxigento\Wallet\Lib\Service\Operation\Request\AddToWalletActive as WalletOperationAddToWalletActiveRequest;
 
-class Call extends NeoCall implements ICalc {
+class Call extends NeoCall implements ICalc
+{
     /** @var  \Praxigento\Bonus\Base\Lib\Service\IPeriod */
     protected $_callBasePeriod;
     /** @var  \Praxigento\Wallet\Lib\Service\IOperation */
@@ -25,9 +26,12 @@ class Call extends NeoCall implements ICalc {
     protected $_subBonus;
     /** @var Sub\Qualification */
     protected $_subQualification;
+    /** @var  \Praxigento\Core\Repo\ITransactionManager */
+    protected $_manTrans;
 
     public function __construct(
         \Psr\Log\LoggerInterface $logger,
+        \Praxigento\Core\Repo\ITransactionManager $manTrans,
         \Praxigento\Bonus\GlobalSales\Lib\Repo\IModule $repoMod,
         \Praxigento\Bonus\Base\Lib\Service\IPeriod $callBasePeriod,
         \Praxigento\Wallet\Lib\Service\IOperation $callWalletOperation,
@@ -35,6 +39,7 @@ class Call extends NeoCall implements ICalc {
         Sub\Qualification $subQual
     ) {
         $this->_logger = $logger;
+        $this->_manTrans = $manTrans;
         $this->_repoMod = $repoMod;
         $this->_callBasePeriod = $callBasePeriod;
         $this->_callWalletOperation = $callWalletOperation;
@@ -47,14 +52,15 @@ class Call extends NeoCall implements ICalc {
      *
      * @return \Praxigento\Wallet\Lib\Service\Operation\Response\AddToWalletActive
      */
-    private function _createBonusOperation($updates) {
+    private function _createBonusOperation($updates)
+    {
         $asCustId = 'asCid';
         $asAmount = 'asAmnt';
         $asRef = 'asRef';
-        $transData = [ ];
-        foreach($updates as $custId => $ranks) {
-            foreach($ranks as $rankId => $amount) {
-                $item = [ $asCustId => $custId, $asAmount => $amount, $asRef => $rankId ];
+        $transData = [];
+        foreach ($updates as $custId => $ranks) {
+            foreach ($ranks as $rankId => $amount) {
+                $item = [$asCustId => $custId, $asAmount => $amount, $asRef => $rankId];
                 $transData[] = $item;
             }
         }
@@ -73,7 +79,8 @@ class Call extends NeoCall implements ICalc {
      *
      * @return Response\Bonus
      */
-    public function bonus(Request\Bonus $req) {
+    public function bonus(Request\Bonus $req)
+    {
         $result = new Response\Bonus();
         $datePerformed = $req->getDatePerformed();
         $dateApplied = $req->getDateApplied();
@@ -84,9 +91,8 @@ class Call extends NeoCall implements ICalc {
         $reqGetPeriod->setBaseCalcTypeCode($calcTypeBase);
         $reqGetPeriod->setDependentCalcTypeCode($calcType);
         $respGetPeriod = $this->_callBasePeriod->getForDependentCalc($reqGetPeriod);
-        if($respGetPeriod->isSucceed()) {
-            $conn = $this->_repoMod->getBasicRepo()->getDba()->getDefaultConnection();
-            $conn->beginTransaction();
+        if ($respGetPeriod->isSucceed()) {
+            $trans = $this->_manTrans->transactionBegin();
             try {
                 $periodDataDepend = $respGetPeriod->getDependentPeriodData();
                 $calcDataDepend = $respGetPeriod->getDependentCalcData();
@@ -108,21 +114,20 @@ class Call extends NeoCall implements ICalc {
                 $this->_repoMod->saveLogRanks($transLog);
                 /* mark calculation as completed and finalize bonus */
                 $this->_repoMod->updateCalcSetComplete($calcIdDepend);
-                $conn->commit();
+                $this->_manTrans->transactionCommit($trans);
                 $result->setPeriodId($periodDataDepend[Period::ATTR_ID]);
                 $result->setCalcId($calcIdDepend);
                 $result->setAsSucceed();
             } finally {
-                if(!$result->isSucceed()) {
-                    $conn->rollback();
-                }
+                $this->_manTrans->transactionClose($trans);
             }
         }
         $this->_logger->info("'Global Sales Bonus' calculation is complete.");
         return $result;
     }
 
-    public function qualification(Request\Qualification $req) {
+    public function qualification(Request\Qualification $req)
+    {
         $result = new Response\Qualification();
         $datePerformed = $req->getDatePerformed();
         $dateApplied = $req->getDateApplied();
@@ -134,9 +139,8 @@ class Call extends NeoCall implements ICalc {
         $reqGetPeriod->setBaseCalcTypeCode($calcTypeBase);
         $reqGetPeriod->setDependentCalcTypeCode($calcType);
         $respGetPeriod = $this->_callBasePeriod->getForDependentCalc($reqGetPeriod);
-        if($respGetPeriod->isSucceed()) {
-            $conn = $this->_repoMod->getBasicRepo()->getDba()->getDefaultConnection();
-            $conn->beginTransaction();
+        if ($respGetPeriod->isSucceed()) {
+            $trans = $this->_manTrans->transactionBegin();
             try {
                 $periodDataDepend = $respGetPeriod->getDependentPeriodData();
                 $calcDataDepend = $respGetPeriod->getDependentCalcData();
@@ -151,14 +155,12 @@ class Call extends NeoCall implements ICalc {
                 $updates = $this->_subQualification->calcParams($tree, $qualData, $cfgParams, $gvMaxLevels);
                 $this->_repoMod->saveQualificationParams($updates);
                 $this->_repoMod->updateCalcSetComplete($calcIdDepend);
-                $conn->commit();
+                $this->_manTrans->transactionCommit($trans);
                 $result->setPeriodId($periodDataDepend[Period::ATTR_ID]);
                 $result->setCalcId($calcIdDepend);
                 $result->setAsSucceed();
             } finally {
-                if(!$result->isSucceed()) {
-                    $conn->rollback();
-                }
+                $this->_manTrans->transactionClose($trans);
             }
         }
         $this->_logger->info("'Qualification for Global Sales' calculation is complete.");

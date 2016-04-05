@@ -165,15 +165,13 @@ class Main_IntegrationTest extends BaseIntegrationTest {
      * @param $calcId
      */
     private function _repoGetQualificationData($calcId) {
-        $dba = $this->repoBasic->getDba();
-        $conn = $dba->getDefaultConnection();
         /* aliases and tables */
         $asCompress = 'pbbc';
         $asQual = 'pbgq';
-        $tblCompress = $dba->getTableName(Compress::ENTITY_NAME);
-        $tblQual = $dba->getTableName(Qualification::ENTITY_NAME);
+        $tblCompress = $this->_conn->getTableName(Compress::ENTITY_NAME);
+        $tblQual = $this->_conn->getTableName(Qualification::ENTITY_NAME);
         /* SELECT  FROM prxgt_bon_base_compress pbbc */
-        $query = $conn->select();
+        $query = $this->_conn->select();
         $query->from([ $asCompress => $tblCompress ], [ Compress::ATTR_CUSTOMER_ID ]);
         /* LEFT JOIN prxgt_bon_loyal_qual pblq ON pbbc.id = pblq.compress_id */
         $on = $asCompress . '.' . Compress::ATTR_ID . "=$asQual." . Qualification::ATTR_COMPRESS_ID;
@@ -183,7 +181,7 @@ class Main_IntegrationTest extends BaseIntegrationTest {
         $where = $asCompress . '.' . Compress::ATTR_CALC_ID . '=' . (int)$calcId;
         $query->where($where);
         // $sql = (string)$query;
-        $result = $conn->fetchAll($query);
+        $result = $this->_conn->fetchAll($query);
         return $result;
     }
 

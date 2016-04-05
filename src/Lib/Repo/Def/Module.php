@@ -127,7 +127,6 @@ class Module extends Base implements IModule
     {
         $tsFrom = $this->_toolPeriod->getTimestampFrom($dsFrom);
         $tsTo = $this->_toolPeriod->getTimestampTo($dsTo);
-        $conn = $this->_getConn();
         /* aliases and tables */
         $asSummary = 'summary';
         $asPv = 'pps';
@@ -159,19 +158,14 @@ class Module extends Base implements IModule
 
     public function saveQualificationParams($updates)
     {
-        $conn = $this->_getConn();
-        $this->_conn->beginTransaction();
-        $isCommited = false;
+        $trans = $this->_manTrans->transactionBegin();
         try {
             foreach ($updates as $item) {
                 $this->_repoBasic->addEntity(Qualification::ENTITY_NAME, $item);
             }
-            $this->_conn->commit();
-            $isCommited = true;
+            $this->_manTrans->transactionCommit($trans);
         } finally {
-            if (!$isCommited) {
-                $this->_conn->rollBack();
-            }
+            $this->_manTrans->transactionClose($trans);
         }
     }
 

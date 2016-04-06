@@ -21,7 +21,7 @@ class Module extends Base implements IModule
     protected $_repoBonusBase;
     /** @var BonusLoyaltyRepo */
     protected $_repoBonusLoyalty;
-    /** @var  \Praxigento\Core\Lib\Tool\Period */
+    /** @var  \Praxigento\Core\Tool\IPeriod */
     protected $_toolPeriod;
     /** @var  \Praxigento\Core\Repo\ITransactionManager */
     protected $_manTrans;
@@ -34,7 +34,7 @@ class Module extends Base implements IModule
         \Praxigento\Core\Repo\IBasic $repoBasic,
         BonusBaseRepo $repoBonusBase,
         BonusLoyaltyRepo $repoBonusLoyalty,
-        \Praxigento\Core\Lib\Tool\Period $toolPeriod
+        \Praxigento\Core\Tool\IPeriod $toolPeriod
     ) {
         parent::__construct($resource);
         $this->_manTrans = $manTrans;

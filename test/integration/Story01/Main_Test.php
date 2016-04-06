@@ -111,7 +111,7 @@ class Main_IntegrationTest extends BaseIntegrationTest {
                 continue;
             }
             $custId = $this->_mapCustomerMageIdByIndex[$custNdx];
-            $ts = $this->_toolbox->getPeriod()->getTimestampTo(self::DS_ORDERS_CREATED);
+            $ts = $this->_toolPeriod->getTimestampTo(self::DS_ORDERS_CREATED);
             $bindOrder = [
                 Cfg::E_SALE_ORDER_A_CUSTOMER_ID      => $custId,
                 Cfg::E_SALE_ORDER_A_BASE_GRAND_TOTAL => $pv,

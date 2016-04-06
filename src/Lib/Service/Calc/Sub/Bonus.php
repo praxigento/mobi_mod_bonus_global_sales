@@ -15,14 +15,14 @@ class Bonus {
     const AS_AMOUNT_TOTAL = 'amountTotal';
     const AS_MEMBERS = 'members';
     const AS_TOTAL_GV = 'totalGv';
-    /** @var  \Praxigento\Core\Lib\Tool\Format */
+    /** @var  \Praxigento\Core\Tool\IFormat */
     protected $_toolFormat;
 
     /**
      * Bonus constructor.
      */
     public function __construct(
-        \Praxigento\Core\Lib\Tool\Format $toolFormat
+        \Praxigento\Core\Tool\IFormat $toolFormat
 
     ) {
         $this->_toolFormat = $toolFormat;

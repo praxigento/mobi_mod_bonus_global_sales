@@ -5,7 +5,7 @@
  */
 namespace Praxigento\BonusGlobalSales\Setup;
 
-use Praxigento\Core\Lib\Context;
+
 
 include_once(__DIR__ . '/../phpunit_bootstrap.php');
 

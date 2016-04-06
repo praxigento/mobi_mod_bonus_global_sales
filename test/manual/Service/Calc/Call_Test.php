@@ -4,14 +4,14 @@
  */
 namespace Praxigento\Bonus\GlobalSales\Lib\Service\Calc;
 
-use Praxigento\Core\Lib\Context;
+
 
 include_once(__DIR__ . '/../../phpunit_bootstrap.php');
 
 class Call_ManualTest extends \Praxigento\Core\Lib\Test\BaseTestCase {
 
     public function test_bonus() {
-        $obm = Context::instance()->getObjectManager();
+        $obm = \Magento\Framework\App\ObjectManager::getInstance();
         /** @var  $dba \Praxigento\Core\Lib\Context\IDbAdapter */
         $dba = $obm->get(\Praxigento\Core\Lib\Context\IDbAdapter::class);
         $dba->getDefaultConnection()->beginTransaction();
@@ -24,7 +24,7 @@ class Call_ManualTest extends \Praxigento\Core\Lib\Test\BaseTestCase {
     }
 
     public function test_qualification() {
-        $obm = Context::instance()->getObjectManager();
+        $obm = \Magento\Framework\App\ObjectManager::getInstance();
         /** @var  $dba \Praxigento\Core\Lib\Context\IDbAdapter */
         $dba = $obm->get(\Praxigento\Core\Lib\Context\IDbAdapter::class);
         $dba->getDefaultConnection()->beginTransaction();

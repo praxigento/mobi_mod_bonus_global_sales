@@ -9,6 +9,6 @@ namespace Praxigento\Bonus\GlobalSales\Lib\Service\Calc\Request;
  * @method string getDatePerformed() Operation performed dates for calculation. UTC current date is used if missed.
  * @method void setDatePerformed(string $data)
  */
-class Bonus extends \Praxigento\Core\Lib\Service\Base\Request {
+class Bonus extends \Praxigento\Core\Service\Base\Request {
 
 }

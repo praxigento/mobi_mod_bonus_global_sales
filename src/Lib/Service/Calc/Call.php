@@ -9,10 +9,10 @@ use Praxigento\Bonus\Base\Lib\Entity\Period;
 use Praxigento\Bonus\Base\Lib\Service\Period\Request\GetForDependentCalc as PeriodGetForDependentCalcRequest;
 use Praxigento\Bonus\GlobalSales\Lib\Service\ICalc;
 use Praxigento\BonusGlobalSales\Config as Cfg;
-use Praxigento\Core\Lib\Service\Base\NeoCall as NeoCall;
+use Praxigento\Core\Service\Base\Call as BaseCall;
 use Praxigento\Wallet\Lib\Service\Operation\Request\AddToWalletActive as WalletOperationAddToWalletActiveRequest;
 
-class Call extends NeoCall implements ICalc
+class Call extends BaseCall implements ICalc
 {
     /** @var  \Praxigento\Bonus\Base\Lib\Service\IPeriod */
     protected $_callBasePeriod;
@@ -20,14 +20,14 @@ class Call extends NeoCall implements ICalc
     protected $_callWalletOperation;
     /** @var \Psr\Log\LoggerInterface */
     protected $_logger;
+    /** @var  \Praxigento\Core\Repo\ITransactionManager */
+    protected $_manTrans;
     /** @var \Praxigento\Bonus\GlobalSales\Lib\Repo\IModule */
     protected $_repoMod;
     /** @var  Sub\Bonus */
     protected $_subBonus;
     /** @var Sub\Qualification */
     protected $_subQualification;
-    /** @var  \Praxigento\Core\Repo\ITransactionManager */
-    protected $_manTrans;
 
     public function __construct(
         \Psr\Log\LoggerInterface $logger,

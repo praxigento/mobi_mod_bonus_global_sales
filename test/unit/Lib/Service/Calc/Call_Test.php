@@ -73,7 +73,7 @@ class Call_UnitTest extends \Praxigento\Core\Lib\Test\BaseMockeryCase {
             ->shouldReceive('getForDependentCalc')->once()
             ->andReturn($mRespGetPeriod);
         // if($respGetPeriod->isSucceed()) {
-        $mRespGetPeriod->setAsSucceed();
+        $mRespGetPeriod->markSucceed();
         // $this->_getConn()->beginTransaction();
         $this->mConn
             ->shouldReceive('beginTransaction')->once();
@@ -114,7 +114,7 @@ class Call_UnitTest extends \Praxigento\Core\Lib\Test\BaseMockeryCase {
             ->shouldReceive('getForDependentCalc')->once()
             ->andReturn($mRespGetPeriod);
         // if($respGetPeriod->isSucceed()) {
-        $mRespGetPeriod->setAsSucceed();
+        $mRespGetPeriod->markSucceed();
         // $this->_getConn()->beginTransaction();
         $this->mConn
             ->shouldReceive('beginTransaction')->once();
@@ -194,7 +194,7 @@ class Call_UnitTest extends \Praxigento\Core\Lib\Test\BaseMockeryCase {
             ->shouldReceive('getForDependentCalc')->once()
             ->andReturn($mRespGetPeriod);
         // if($respGetPeriod->isSucceed()) {
-        $mRespGetPeriod->setAsSucceed();
+        $mRespGetPeriod->markSucceed();
         // $this->_getConn()->beginTransaction();
         $this->mConn
             ->shouldReceive('beginTransaction')->once();
@@ -248,7 +248,7 @@ class Call_UnitTest extends \Praxigento\Core\Lib\Test\BaseMockeryCase {
             ->shouldReceive('getForDependentCalc')->once()
             ->andReturn($mRespGetPeriod);
         // if($respGetPeriod->isSucceed()) {
-        $mRespGetPeriod->setAsSucceed();
+        $mRespGetPeriod->markSucceed();
         // $this->_getConn()->beginTransaction();
         $this->mConn
             ->shouldReceive('beginTransaction')->once();

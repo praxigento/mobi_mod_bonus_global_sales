@@ -15,7 +15,7 @@ use Praxigento\Bonus\GlobalSales\Lib\Service\Calc\Request\Bonus as GlobalSalesCa
 use Praxigento\Bonus\GlobalSales\Lib\Service\Calc\Request\Qualification as GlobalSalesCalcQualificationRequest;
 use Praxigento\Bonus\Loyalty\Lib\Service\Calc\Request\Compress as LoyaltyCalcCompressRequest;
 
-use Praxigento\Core\Lib\Test\BaseIntegrationTest;
+use Praxigento\Core\Test\BaseIntegrationTest;
 use Praxigento\Pv\Data\Entity\Sale as PvSale;
 use Praxigento\Pv\Lib\Service\Sale\Request\AccountPv as PvSaleAccountPvRequest;
 

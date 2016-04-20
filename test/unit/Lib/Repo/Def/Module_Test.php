@@ -27,6 +27,7 @@ class Module_UnitTest extends \Praxigento\Core\Lib\Test\BaseMockeryCase {
 
     protected function setUp() {
         parent::setUp();
+        $this->markTestSkipped('Test is deprecated after M1 & M2 merge is done.');
         $this->mConn = $this->_mockDba();
         $this->mDba = $this->_mockRsrcConnOld($this->mConn);
         $this->mRepoBasic = $this->_mockRepoBasic($this->mDba);

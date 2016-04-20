@@ -15,7 +15,7 @@ class Module_UnitTest extends \Praxigento\Core\Lib\Test\BaseMockeryCase {
     /** @var  \Mockery\MockInterface */
     private $mDba;
     /** @var  \Mockery\MockInterface */
-    private $mRepoBasic;
+    private $mRepoGeneric;
     /** @var  \Mockery\MockInterface */
     private $mRepoBonusBase;
     /** @var  \Mockery\MockInterface */
@@ -29,13 +29,13 @@ class Module_UnitTest extends \Praxigento\Core\Lib\Test\BaseMockeryCase {
         parent::setUp();
         $this->markTestSkipped('Test is deprecated after M1 & M2 merge is done.');
         $this->mConn = $this->_mockDba();
-        $this->mDba = $this->_mockRsrcConnOld($this->mConn);
-        $this->mRepoBasic = $this->_mockRepoBasic($this->mDba);
+        $this->mDba = $this->_mockResourceConnection($this->mConn);
+        $this->mRepoGeneric = $this->_mockRepoGeneric($this->mDba);
         $this->mRepoBonusBase = $this->_mock(\Praxigento\Bonus\Base\Lib\Repo\IModule::class);
         $this->mRepoBonusLoyalty = $this->_mock(\Praxigento\Bonus\Loyalty\Lib\Repo\IModule::class);
         $this->mToolPeriod = $this->_mock(\Praxigento\Core\Tool\IPeriod::class);
         $this->repo = new Module(
-            $this->mRepoBasic,
+            $this->mRepoGeneric,
             $this->mRepoBonusBase,
             $this->mRepoBonusLoyalty,
             $this->mToolPeriod
@@ -89,7 +89,7 @@ class Module_UnitTest extends \Praxigento\Core\Lib\Test\BaseMockeryCase {
 
         /** === Setup Mocks === */
         // $data = $this->_repoBasic->getEntities(Param::ENTITY_NAME, null, null, $order);
-        $this->mRepoBasic
+        $this->mRepoGeneric
             ->shouldReceive('getEntities')
             ->andReturn($DATA);
 
@@ -210,7 +210,7 @@ class Module_UnitTest extends \Praxigento\Core\Lib\Test\BaseMockeryCase {
 
         /** === Setup Mocks === */
         $this->mConn->shouldReceive('beginTransaction')->once();
-        $this->mRepoBasic
+        $this->mRepoGeneric
             ->shouldReceive('addEntity')->once();
         $this->mConn->shouldReceive('commit')->once();
 
@@ -227,7 +227,7 @@ class Module_UnitTest extends \Praxigento\Core\Lib\Test\BaseMockeryCase {
 
         /** === Setup Mocks === */
         $this->mConn->shouldReceive('beginTransaction')->once();
-        $this->mRepoBasic
+        $this->mRepoGeneric
             ->shouldReceive('addEntity')->andThrow(new \Exception());
         $this->mConn->shouldReceive('rollBack')->once();
 

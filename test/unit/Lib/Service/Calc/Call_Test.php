@@ -26,7 +26,7 @@ class Call_UnitTest extends \Praxigento\Core\Lib\Test\BaseMockeryCase
     /** @var  \Mockery\MockInterface */
     private $mLogger;
     /** @var  \Mockery\MockInterface */
-    private $mRepoBasic;
+    private $mRepoGeneric;
     /** @var  \Mockery\MockInterface */
     private $mRepoMod;
     /** @var  \Mockery\MockInterface */
@@ -39,11 +39,11 @@ class Call_UnitTest extends \Praxigento\Core\Lib\Test\BaseMockeryCase
         parent::setUp();
         $this->markTestSkipped('Test is deprecated after M1 & M2 merge is done.');
         $this->mConn = $this->_mockDba();
-        $this->mDba = $this->_mockRsrcConnOld($this->mConn);
-        $this->mRepoBasic = $this->_mockRepoBasic($this->mDba);
+        $this->mDba = $this->_mockResourceConnection($this->mConn);
+        $this->mRepoGeneric = $this->_mockRepoGeneric($this->mDba);
         $this->mRepoMod = $this->_mockRepoMod(
             \Praxigento\Bonus\GlobalSales\Lib\Repo\IModule::class,
-            $this->mRepoBasic
+            $this->mRepoGeneric
         );
         $this->mLogger = $this->_mockLogger();
         $this->mCallBasePeriod = $this->_mock(\Praxigento\Bonus\Base\Lib\Service\IPeriod::class);

@@ -10,13 +10,13 @@ use Praxigento\Bonus\Base\Lib\Service\Period\Request\GetForDependentCalc as Peri
 use Praxigento\Bonus\GlobalSales\Lib\Service\ICalc;
 use Praxigento\BonusGlobalSales\Config as Cfg;
 use Praxigento\Core\Service\Base\Call as BaseCall;
-use Praxigento\Wallet\Lib\Service\Operation\Request\AddToWalletActive as WalletOperationAddToWalletActiveRequest;
+use Praxigento\Wallet\Service\Operation\Request\AddToWalletActive as WalletOperationAddToWalletActiveRequest;
 
 class Call extends BaseCall implements ICalc
 {
     /** @var  \Praxigento\Bonus\Base\Lib\Service\IPeriod */
     protected $_callBasePeriod;
-    /** @var  \Praxigento\Wallet\Lib\Service\IOperation */
+    /** @var  \Praxigento\Wallet\Service\IOperation */
     protected $_callWalletOperation;
     /** @var \Psr\Log\LoggerInterface */
     protected $_logger;
@@ -34,7 +34,7 @@ class Call extends BaseCall implements ICalc
         \Praxigento\Core\Repo\ITransactionManager $manTrans,
         \Praxigento\Bonus\GlobalSales\Lib\Repo\IModule $repoMod,
         \Praxigento\Bonus\Base\Lib\Service\IPeriod $callBasePeriod,
-        \Praxigento\Wallet\Lib\Service\IOperation $callWalletOperation,
+        \Praxigento\Wallet\Service\IOperation $callWalletOperation,
         Sub\Bonus $subBonus,
         Sub\Qualification $subQual
     ) {
@@ -50,7 +50,7 @@ class Call extends BaseCall implements ICalc
     /**
      * @param $updates [$custId=>[$rankId=>$bonus, ...], ...]
      *
-     * @return \Praxigento\Wallet\Lib\Service\Operation\Response\AddToWalletActive
+     * @return \Praxigento\Wallet\Service\Operation\Response\AddToWalletActive
      */
     private function _createBonusOperation($updates)
     {

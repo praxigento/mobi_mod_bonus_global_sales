@@ -17,7 +17,7 @@ use Praxigento\Bonus\Loyalty\Lib\Service\Calc\Request\Compress as LoyaltyCalcCom
 
 use Praxigento\Core\Test\BaseIntegrationTest;
 use Praxigento\Pv\Data\Entity\Sale as PvSale;
-use Praxigento\Pv\Lib\Service\Sale\Request\AccountPv as PvSaleAccountPvRequest;
+use Praxigento\Pv\Service\Sale\Request\AccountPv as PvSaleAccountPvRequest;
 
 include_once(__DIR__ . '/../phpunit_bootstrap.php');
 
@@ -52,7 +52,7 @@ class Main_IntegrationTest extends BaseIntegrationTest {
     private $_callGlobalSalesCalc;
     /** @var \Praxigento\Bonus\Loyalty\Lib\Service\ICalc */
     private $_callLoyaltyCalc;
-    /** @var  \Praxigento\Pv\Lib\Service\ISale */
+    /** @var  \Praxigento\Pv\Service\ISale */
     private $_callPvSale;
     /** @var   \Praxigento\Accounting\Repo\IModule */
     private $_repoAcc;
@@ -65,7 +65,7 @@ class Main_IntegrationTest extends BaseIntegrationTest {
         parent::__construct();
         $this->_callGlobalSalesCalc = $this->_manObj->get(\Praxigento\Bonus\GlobalSales\Lib\Service\ICalc::class);
         $this->_callLoyaltyCalc = $this->_manObj->get(\Praxigento\Bonus\Loyalty\Lib\Service\ICalc::class);
-        $this->_callPvSale = $this->_manObj->get(\Praxigento\Pv\Lib\Service\ISale::class);
+        $this->_callPvSale = $this->_manObj->get(\Praxigento\Pv\Service\ISale::class);
         $this->repoBasic = $this->_manObj->get(\Praxigento\Core\Repo\IGeneric::class);
         $this->_repoBase = $this->_manObj->get(\Praxigento\Bonus\Base\Lib\Repo\IModule::class);
         $this->_repoAcc = $this->_manObj->get(\Praxigento\Accounting\Repo\IModule::class);

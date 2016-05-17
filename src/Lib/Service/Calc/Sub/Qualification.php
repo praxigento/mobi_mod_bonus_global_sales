@@ -11,22 +11,22 @@ use Praxigento\Bonus\Base\Lib\Entity\Compress;
 use Praxigento\Bonus\GlobalSales\Lib\Entity\Cfg\Param;
 use Praxigento\Bonus\GlobalSales\Lib\Entity\Qualification as EntityQual;
 use Praxigento\Downline\Data\Entity\Snap;
-use Praxigento\Downline\Lib\Service\Map\Request\ById as DownlineMapByIdRequest;
-use Praxigento\Downline\Lib\Service\Map\Request\TreeByDepth as DownlineMapTreeByDepthRequest;
-use Praxigento\Downline\Lib\Service\Snap\Request\ExpandMinimal as DownlineSnapExtendMinimalRequest;
+use Praxigento\Downline\Service\Map\Request\ById as DownlineMapByIdRequest;
+use Praxigento\Downline\Service\Map\Request\TreeByDepth as DownlineMapTreeByDepthRequest;
+use Praxigento\Downline\Service\Snap\Request\ExpandMinimal as DownlineSnapExtendMinimalRequest;
 
 class Qualification {
 
-    /** @var  \Praxigento\Downline\Lib\Service\IMap */
+    /** @var  \Praxigento\Downline\Service\IMap */
     protected $_callDownlineMap;
-    /** @var   \Praxigento\Downline\Lib\Service\ISnap */
+    /** @var   \Praxigento\Downline\Service\ISnap */
     protected $_callDownlineSnap;
     /** @var \Praxigento\Downline\Tool\ITree */
     protected $_toolDownlineTree;
 
     public function __construct(
-        \Praxigento\Downline\Lib\Service\IMap $callDownlineMap,
-        \Praxigento\Downline\Lib\Service\ISnap $callDownlineSnap,
+        \Praxigento\Downline\Service\IMap $callDownlineMap,
+        \Praxigento\Downline\Service\ISnap $callDownlineSnap,
         \Praxigento\Downline\Tool\ITree $toolDownlineTree
     ) {
         $this->_callDownlineMap = $callDownlineMap;

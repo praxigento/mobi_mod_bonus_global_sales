@@ -68,8 +68,8 @@ class Module extends Base implements IModule
         /* aliases and tables */
         $asQual = 'pbgq';
         $asCompress = 'pbbc';
-        $tblQual = $this->_conn->getTableName(Qualification::ENTITY_NAME);
-        $tblCompress = $this->_conn->getTableName(Compress::ENTITY_NAME);
+        $tblQual = $this->_resource->getTableName(Qualification::ENTITY_NAME);
+        $tblCompress = $this->_resource->getTableName(Compress::ENTITY_NAME);
         // SELECT FROM prxgt_bon_globsal_qual pbgq
         $query = $this->_conn->select();
         $query->from([$asQual => $tblQual], [Qualification::ATTR_GV, Qualification::ATTR_RANK_ID]);
@@ -130,7 +130,7 @@ class Module extends Base implements IModule
         /* aliases and tables */
         $asSummary = 'summary';
         $asPv = 'pps';
-        $tblPv = $this->_conn->getTableName(PvSale::ENTITY_NAME);
+        $tblPv = $this->_resource->getTableName(PvSale::ENTITY_NAME);
         // SELECT FROM prxgt_pv_sale pps
         $query = $this->_conn->select();
         $query->from([$asPv => $tblPv], [$asSummary => 'SUM(' . PvSale::ATTR_TOTAL . ')']);

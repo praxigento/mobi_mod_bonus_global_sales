@@ -26,7 +26,7 @@ class InstallData extends \Praxigento\Core\Setup\Data\Base
     private function _addBonusCalculationsTypes()
     {
         $this->_conn->insertArray(
-            $this->_conn->getTableName(TypeCalc::ENTITY_NAME),
+            $this->_resource->getTableName(TypeCalc::ENTITY_NAME),
             [TypeCalc::ATTR_CODE, TypeCalc::ATTR_NOTE],
             [
                 [Cfg::CODE_TYPE_CALC_QUALIFICATION, 'Qualification for Global Sales bonus.'],

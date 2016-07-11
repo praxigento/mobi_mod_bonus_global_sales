@@ -168,8 +168,8 @@ class Main_IntegrationTest extends BaseIntegrationTest {
         /* aliases and tables */
         $asCompress = 'pbbc';
         $asQual = 'pbgq';
-        $tblCompress = $this->_conn->getTableName(Compress::ENTITY_NAME);
-        $tblQual = $this->_conn->getTableName(Qualification::ENTITY_NAME);
+        $tblCompress = $this->_resource->getTableName(Compress::ENTITY_NAME);
+        $tblQual = $this->_resource->getTableName(Qualification::ENTITY_NAME);
         /* SELECT  FROM prxgt_bon_base_compress pbbc */
         $query = $this->_conn->select();
         $query->from([ $asCompress => $tblCompress ], [ Compress::ATTR_CUSTOMER_ID ]);

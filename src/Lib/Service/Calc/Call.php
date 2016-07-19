@@ -20,7 +20,7 @@ class Call extends BaseCall implements ICalc
     protected $_callWalletOperation;
     /** @var \Psr\Log\LoggerInterface */
     protected $_logger;
-    /** @var  \Praxigento\Core\Repo\Transaction\IManager */
+    /** @var  \Praxigento\Core\Transaction\Database\IManager */
     protected $_manTrans;
     /** @var \Praxigento\Bonus\GlobalSales\Lib\Repo\IModule */
     protected $_repoMod;
@@ -31,7 +31,7 @@ class Call extends BaseCall implements ICalc
 
     public function __construct(
         \Psr\Log\LoggerInterface $logger,
-        \Praxigento\Core\Repo\Transaction\IManager $manTrans,
+        \Praxigento\Core\Transaction\Database\IManager $manTrans,
         \Praxigento\Bonus\GlobalSales\Lib\Repo\IModule $repoMod,
         \Praxigento\Bonus\Base\Lib\Service\IPeriod $callBasePeriod,
         \Praxigento\Wallet\Service\IOperation $callWalletOperation,
@@ -92,7 +92,7 @@ class Call extends BaseCall implements ICalc
         $reqGetPeriod->setDependentCalcTypeCode($calcType);
         $respGetPeriod = $this->_callBasePeriod->getForDependentCalc($reqGetPeriod);
         if ($respGetPeriod->isSucceed()) {
-            $trans = $this->_manTrans->transactionBegin();
+            $def = $this->_manTrans->begin();
             try {
                 $periodDataDepend = $respGetPeriod->getDependentPeriodData();
                 $calcDataDepend = $respGetPeriod->getDependentCalcData();
@@ -114,12 +114,12 @@ class Call extends BaseCall implements ICalc
                 $this->_repoMod->saveLogRanks($transLog);
                 /* mark calculation as completed and finalize bonus */
                 $this->_repoMod->updateCalcSetComplete($calcIdDepend);
-                $this->_manTrans->transactionCommit($trans);
+                $this->_manTrans->commit($def);
                 $result->setPeriodId($periodDataDepend[Period::ATTR_ID]);
                 $result->setCalcId($calcIdDepend);
                 $result->markSucceed();
             } finally {
-                $this->_manTrans->transactionClose($trans);
+                $this->_manTrans->end($def);
             }
         }
         $this->_logger->info("'Global Sales Bonus' calculation is complete.");
@@ -140,7 +140,7 @@ class Call extends BaseCall implements ICalc
         $reqGetPeriod->setDependentCalcTypeCode($calcType);
         $respGetPeriod = $this->_callBasePeriod->getForDependentCalc($reqGetPeriod);
         if ($respGetPeriod->isSucceed()) {
-            $trans = $this->_manTrans->transactionBegin();
+            $def = $this->_manTrans->begin();
             try {
                 $periodDataDepend = $respGetPeriod->getDependentPeriodData();
                 $calcDataDepend = $respGetPeriod->getDependentCalcData();
@@ -155,12 +155,12 @@ class Call extends BaseCall implements ICalc
                 $updates = $this->_subQualification->calcParams($tree, $qualData, $cfgParams, $gvMaxLevels);
                 $this->_repoMod->saveQualificationParams($updates);
                 $this->_repoMod->updateCalcSetComplete($calcIdDepend);
-                $this->_manTrans->transactionCommit($trans);
+                $this->_manTrans->commit($def);
                 $result->setPeriodId($periodDataDepend[Period::ATTR_ID]);
                 $result->setCalcId($calcIdDepend);
                 $result->markSucceed();
             } finally {
-                $this->_manTrans->transactionClose($trans);
+                $this->_manTrans->end($def);
             }
         }
         $this->_logger->info("'Qualification for Global Sales' calculation is complete.");

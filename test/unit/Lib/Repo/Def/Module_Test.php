@@ -9,7 +9,7 @@ use Praxigento\Bonus\GlobalSales\Lib\Entity\Cfg\Param;
 
 include_once(__DIR__ . '/../../../phpunit_bootstrap.php');
 
-class Module_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase {
+class Module_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery {
     /** @var  \Mockery\MockInterface */
     private $mConn;
     /** @var  \Mockery\MockInterface */

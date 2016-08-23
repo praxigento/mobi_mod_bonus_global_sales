@@ -63,7 +63,7 @@ class Bonus_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase {
         // $mapAmounts = $this->_mapPayoutsByRank($pvTotal, $params);
         // $bonus = $this->_toolFormat->roundBonus($pvTotal * $percent);
         $this->mToolFormat
-            ->shouldReceive('roundBonus')->once()
+            ->shouldReceive('roundBonus')->times(4)
             ->andReturn($PV_TOTAL * 0.01);
         $this->mToolFormat
             ->shouldReceive('roundBonus')->once()

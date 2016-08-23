@@ -10,7 +10,7 @@ use Praxigento\Bonus\GlobalSales\Lib\Entity\Qualification;
 include_once(__DIR__ . '/../phpunit_bootstrap.php');
 
 class InstallSchema_UnitTest
-    extends \Praxigento\Core\Test\BaseCase\InstallSchema
+    extends \Praxigento\Core\Test\BaseCase\Setup\Schema
 {
     /** @var  InstallSchema */
     private $obj;

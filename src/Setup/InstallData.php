@@ -14,7 +14,7 @@ class InstallData extends \Praxigento\Core\Setup\Data\Base
 {
     private function _addAccountingOperationsTypes()
     {
-        $this->_repoBasic->addEntity(
+        $this->_repoGeneric->addEntity(
             TypeOperation::ENTITY_NAME,
             [
                 TypeOperation::ATTR_CODE => Cfg::CODE_TYPE_OPER_BONUS,

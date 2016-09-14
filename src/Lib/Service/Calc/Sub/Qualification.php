@@ -1,6 +1,6 @@
 <?php
 /**
- * This qualifier is used in \Praxigento\BonusBase\Lib\Service\ICompress::qualifyByUserData operation.
+ * This qualifier is used in \Praxigento\BonusBase\Service\ICompress::qualifyByUserData operation.
  *
  * User: Alex Gusev <alex@flancer64.com>
  */

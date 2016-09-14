@@ -6,7 +6,7 @@
 namespace Praxigento\Bonus\GlobalSales\Lib\Repo\Def;
 
 use Praxigento\BonusBase\Data\Entity\Compress;
-use Praxigento\BonusBase\Lib\Repo\IModule as BonusBaseRepo;
+use Praxigento\BonusBase\Repo\IModule as BonusBaseRepo;
 use Praxigento\Bonus\GlobalSales\Lib\Entity\Cfg\Param;
 use Praxigento\Bonus\GlobalSales\Lib\Entity\Qualification;
 use Praxigento\Bonus\GlobalSales\Lib\Repo\decimal;

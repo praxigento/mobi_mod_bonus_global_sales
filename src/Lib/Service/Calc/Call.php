@@ -6,7 +6,7 @@ namespace Praxigento\Bonus\GlobalSales\Lib\Service\Calc;
 
 use Praxigento\BonusBase\Data\Entity\Calculation;
 use Praxigento\BonusBase\Data\Entity\Period;
-use Praxigento\BonusBase\Lib\Service\Period\Request\GetForDependentCalc as PeriodGetForDependentCalcRequest;
+use Praxigento\BonusBase\Service\Period\Request\GetForDependentCalc as PeriodGetForDependentCalcRequest;
 use Praxigento\Bonus\GlobalSales\Lib\Service\ICalc;
 use Praxigento\BonusGlobalSales\Config as Cfg;
 use Praxigento\Core\Service\Base\Call as BaseCall;
@@ -14,7 +14,7 @@ use Praxigento\Wallet\Service\Operation\Request\AddToWalletActive as WalletOpera
 
 class Call extends BaseCall implements ICalc
 {
-    /** @var  \Praxigento\BonusBase\Lib\Service\IPeriod */
+    /** @var  \Praxigento\BonusBase\Service\IPeriod */
     protected $_callBasePeriod;
     /** @var  \Praxigento\Wallet\Service\IOperation */
     protected $_callWalletOperation;
@@ -33,7 +33,7 @@ class Call extends BaseCall implements ICalc
         \Psr\Log\LoggerInterface $logger,
         \Praxigento\Core\Transaction\Database\IManager $manTrans,
         \Praxigento\Bonus\GlobalSales\Lib\Repo\IModule $repoMod,
-        \Praxigento\BonusBase\Lib\Service\IPeriod $callBasePeriod,
+        \Praxigento\BonusBase\Service\IPeriod $callBasePeriod,
         \Praxigento\Wallet\Service\IOperation $callWalletOperation,
         Sub\Bonus $subBonus,
         Sub\Qualification $subQual

@@ -31,7 +31,7 @@ class Module_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery {
         $this->mConn = $this->_mockDba();
         $this->mDba = $this->_mockResourceConnection($this->mConn);
         $this->mRepoGeneric = $this->_mockRepoGeneric($this->mDba);
-        $this->mRepoBonusBase = $this->_mock(\Praxigento\BonusBase\Lib\Repo\IModule::class);
+        $this->mRepoBonusBase = $this->_mock(\Praxigento\BonusBase\Repo\IModule::class);
         $this->mRepoBonusLoyalty = $this->_mock(\Praxigento\Bonus\Loyalty\Lib\Repo\IModule::class);
         $this->mToolPeriod = $this->_mock(\Praxigento\Core\Tool\IPeriod::class);
         $this->repo = new Module(

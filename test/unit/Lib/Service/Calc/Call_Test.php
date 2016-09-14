@@ -6,8 +6,8 @@
 namespace Praxigento\Bonus\GlobalSales\Lib\Service\Calc;
 
 
-use Praxigento\Bonus\Base\Lib\Entity\Calculation;
-use Praxigento\Bonus\Base\Lib\Entity\Period;
+use Praxigento\BonusBase\Data\Entity\Calculation;
+use Praxigento\BonusBase\Data\Entity\Period;
 
 include_once(__DIR__ . '/../../../phpunit_bootstrap.php');
 
@@ -46,7 +46,7 @@ class Call_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
             $this->mRepoGeneric
         );
         $this->mLogger = $this->_mockLogger();
-        $this->mCallBasePeriod = $this->_mock(\Praxigento\Bonus\Base\Lib\Service\IPeriod::class);
+        $this->mCallBasePeriod = $this->_mock(\Praxigento\BonusBase\Lib\Service\IPeriod::class);
         $this->mCallWalletOperation = $this->_mock(\Praxigento\Wallet\Service\IOperation::class);
         $this->mSubBonus = $this->_mock(Sub\Bonus::class);
         $this->mSubQual = $this->_mock(Sub\Qualification::class);
@@ -72,7 +72,7 @@ class Call_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
         /** === Setup Mocks === */
         $this->mLogger->shouldReceive('info');
         // $respGetPeriod = $this->_callBasePeriod->getForDependentCalc($reqGetPeriod);
-        $mRespGetPeriod = new \Praxigento\Bonus\Base\Lib\Service\Period\Response\GetForDependentCalc();
+        $mRespGetPeriod = new \Praxigento\BonusBase\Lib\Service\Period\Response\GetForDependentCalc();
         $this->mCallBasePeriod
             ->shouldReceive('getForDependentCalc')->once()
             ->andReturn($mRespGetPeriod);
@@ -114,7 +114,7 @@ class Call_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
         /** === Setup Mocks === */
         $this->mLogger->shouldReceive('info');
         // $respGetPeriod = $this->_callBasePeriod->getForDependentCalc($reqGetPeriod);
-        $mRespGetPeriod = new \Praxigento\Bonus\Base\Lib\Service\Period\Response\GetForDependentCalc();
+        $mRespGetPeriod = new \Praxigento\BonusBase\Lib\Service\Period\Response\GetForDependentCalc();
         $this->mCallBasePeriod
             ->shouldReceive('getForDependentCalc')->once()
             ->andReturn($mRespGetPeriod);
@@ -195,7 +195,7 @@ class Call_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
         /** === Setup Mocks === */
         $this->mLogger->shouldReceive('info');
         // $respGetPeriod = $this->_callBasePeriod->getForDependentCalc($reqGetPeriod);
-        $mRespGetPeriod = new \Praxigento\Bonus\Base\Lib\Service\Period\Response\GetForDependentCalc();
+        $mRespGetPeriod = new \Praxigento\BonusBase\Lib\Service\Period\Response\GetForDependentCalc();
         $this->mCallBasePeriod
             ->shouldReceive('getForDependentCalc')->once()
             ->andReturn($mRespGetPeriod);
@@ -250,7 +250,7 @@ class Call_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
         /** === Setup Mocks === */
         $this->mLogger->shouldReceive('info');
         // $respGetPeriod = $this->_callBasePeriod->getForDependentCalc($reqGetPeriod);
-        $mRespGetPeriod = new \Praxigento\Bonus\Base\Lib\Service\Period\Response\GetForDependentCalc();
+        $mRespGetPeriod = new \Praxigento\BonusBase\Lib\Service\Period\Response\GetForDependentCalc();
         $this->mCallBasePeriod
             ->shouldReceive('getForDependentCalc')->once()
             ->andReturn($mRespGetPeriod);

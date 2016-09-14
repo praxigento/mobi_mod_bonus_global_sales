@@ -5,9 +5,9 @@
 namespace Praxigento\Bonus\GlobalSales\Lib\Test\Story01;
 
 use Praxigento\Accounting\Data\Entity\Account;
-use Praxigento\Bonus\Base\Lib\Entity\Calculation;
-use Praxigento\Bonus\Base\Lib\Entity\Compress;
-use Praxigento\Bonus\Base\Lib\Entity\Rank;
+use Praxigento\BonusBase\Data\Entity\Calculation;
+use Praxigento\BonusBase\Data\Entity\Compress;
+use Praxigento\BonusBase\Data\Entity\Rank;
 use Praxigento\Bonus\GlobalSales\Lib\Entity\Cfg\Param;
 use Praxigento\Bonus\GlobalSales\Lib\Entity\Qualification;
 use Praxigento\Bonus\GlobalSales\Lib\Service\Calc\Request\Bonus as GlobalSalesCalcBonusRequest;
@@ -56,7 +56,7 @@ class Main_IntegrationTest extends BaseIntegrationTest
     private $_callPvSale;
     /** @var   \Praxigento\Accounting\Repo\IModule */
     private $_repoAcc;
-    /** @var \Praxigento\Bonus\Base\Lib\Repo\IModule */
+    /** @var \Praxigento\BonusBase\Lib\Repo\IModule */
     private $_repoBase;
     /** @var  \Praxigento\Accounting\Repo\Entity\Type\IAsset */
     private $_repoTypeAsset;
@@ -71,7 +71,7 @@ class Main_IntegrationTest extends BaseIntegrationTest
         $this->_callPvSale = $this->_manObj->get(\Praxigento\Pv\Service\ISale::class);
         $this->repoBasic = $this->_manObj->get(\Praxigento\Core\Repo\IGeneric::class);
         $this->_repoTypeAsset = $this->_manObj->get(\Praxigento\Accounting\Repo\Entity\Type\IAsset::class);
-        $this->_repoBase = $this->_manObj->get(\Praxigento\Bonus\Base\Lib\Repo\IModule::class);
+        $this->_repoBase = $this->_manObj->get(\Praxigento\BonusBase\Lib\Repo\IModule::class);
         $this->_repoAcc = $this->_manObj->get(\Praxigento\Accounting\Repo\IModule::class);
     }
 

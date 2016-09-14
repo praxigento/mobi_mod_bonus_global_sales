@@ -6,7 +6,7 @@
 namespace Praxigento\Bonus\GlobalSales\Lib\Service\Calc\Sub;
 
 use Flancer32\Lib\DataObject;
-use Praxigento\Bonus\Base\Lib\Entity\Compress;
+use Praxigento\BonusBase\Data\Entity\Compress;
 use Praxigento\Bonus\GlobalSales\Lib\Entity\Cfg\Param;
 use Praxigento\Downline\Data\Entity\Snap;
 

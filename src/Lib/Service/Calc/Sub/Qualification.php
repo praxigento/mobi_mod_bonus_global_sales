@@ -1,13 +1,13 @@
 <?php
 /**
- * This qualifier is used in \Praxigento\Bonus\Base\Lib\Service\ICompress::qualifyByUserData operation.
+ * This qualifier is used in \Praxigento\BonusBase\Lib\Service\ICompress::qualifyByUserData operation.
  *
  * User: Alex Gusev <alex@flancer64.com>
  */
 
 namespace Praxigento\Bonus\GlobalSales\Lib\Service\Calc\Sub;
 
-use Praxigento\Bonus\Base\Lib\Entity\Compress;
+use Praxigento\BonusBase\Data\Entity\Compress;
 use Praxigento\Bonus\GlobalSales\Lib\Entity\Cfg\Param;
 use Praxigento\Bonus\GlobalSales\Lib\Entity\Qualification as EntityQual;
 use Praxigento\Downline\Data\Entity\Snap;

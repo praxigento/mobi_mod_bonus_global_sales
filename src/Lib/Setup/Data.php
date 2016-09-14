@@ -5,7 +5,7 @@
 namespace Praxigento\Bonus\GlobalSales\Lib\Setup;
 
 use Praxigento\Accounting\Data\Entity\Type\Operation as TypeOperation;
-use Praxigento\Bonus\Base\Lib\Entity\Type\Calc as TypeCalc;
+use Praxigento\BonusBase\Data\Entity\Type\Calc as TypeCalc;
 use Praxigento\BonusGlobalSales\Config as Cfg;
 
 class Data extends \Praxigento\Core\Lib\Setup\Data\Base {

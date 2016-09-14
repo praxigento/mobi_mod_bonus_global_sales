@@ -5,7 +5,7 @@
 
 namespace Praxigento\Bonus\GlobalSales\Lib\Service\Calc\Sub;
 
-use Praxigento\Bonus\Base\Lib\Entity\Compress;
+use Praxigento\BonusBase\Data\Entity\Compress;
 use Praxigento\Bonus\GlobalSales\Lib\Entity\Cfg\Param;
 use Praxigento\Bonus\GlobalSales\Lib\Entity\Qualification;
 

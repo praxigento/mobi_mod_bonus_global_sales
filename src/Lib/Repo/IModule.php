@@ -44,7 +44,7 @@ interface IModule
     public function getLatestCalcForPeriod($calcTypeId, $dsBegin, $dsEnd);
 
     /**
-     * Decorator for \Praxigento\Bonus\Loyalty\Repo\Def\Module::getQualificationData
+     * Decorator for \Praxigento\BonusLoyalty\Repo\Def\Module::getQualificationData
      *
      * @param string $dsFrom 'YYYYMMDD'
      * @param string $dsTo 'YYYYMMDD'

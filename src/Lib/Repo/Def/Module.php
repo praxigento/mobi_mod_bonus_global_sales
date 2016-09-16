@@ -5,13 +5,13 @@
  */
 namespace Praxigento\Bonus\GlobalSales\Lib\Repo\Def;
 
-use Praxigento\BonusBase\Data\Entity\Compress;
-use Praxigento\BonusBase\Repo\IModule as BonusBaseRepo;
 use Praxigento\Bonus\GlobalSales\Lib\Entity\Cfg\Param;
 use Praxigento\Bonus\GlobalSales\Lib\Entity\Qualification;
 use Praxigento\Bonus\GlobalSales\Lib\Repo\decimal;
 use Praxigento\Bonus\GlobalSales\Lib\Repo\IModule;
-use Praxigento\Bonus\Loyalty\Repo\IModule as BonusLoyaltyRepo;
+use Praxigento\BonusBase\Data\Entity\Compress;
+use Praxigento\BonusBase\Repo\IModule as BonusBaseRepo;
+use Praxigento\BonusLoyalty\Repo\IModule as BonusLoyaltyRepo;
 use Praxigento\Core\Repo\Def\Db;
 use Praxigento\Pv\Data\Entity\Sale as PvSale;
 

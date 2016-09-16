@@ -11,7 +11,7 @@ use Praxigento\Bonus\GlobalSales\Lib\Entity\Cfg\Param;
 use Praxigento\Bonus\GlobalSales\Lib\Entity\Qualification;
 use Praxigento\Bonus\GlobalSales\Lib\Repo\decimal;
 use Praxigento\Bonus\GlobalSales\Lib\Repo\IModule;
-use Praxigento\Bonus\Loyalty\Lib\Repo\IModule as BonusLoyaltyRepo;
+use Praxigento\Bonus\Loyalty\Repo\IModule as BonusLoyaltyRepo;
 use Praxigento\Core\Repo\Def\Db;
 use Praxigento\Pv\Data\Entity\Sale as PvSale;
 

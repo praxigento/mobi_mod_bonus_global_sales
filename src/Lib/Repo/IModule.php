@@ -9,15 +9,6 @@ interface IModule
 {
 
     /**
-     * Decorator for \Praxigento\BonusBase\Repo\IModule::getCompressedTree
-     *
-     * @param $calcId
-     *
-     * @return array [[Compress/*], ...]
-     */
-    public function getCompressedTree($calcId);
-
-    /**
      * Get compressed tree with qualification data (GV, rank).
      *
      * @param $calcId

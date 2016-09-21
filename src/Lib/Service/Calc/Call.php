@@ -4,10 +4,10 @@
  */
 namespace Praxigento\Bonus\GlobalSales\Lib\Service\Calc;
 
+use Praxigento\Bonus\GlobalSales\Lib\Service\ICalc;
 use Praxigento\BonusBase\Data\Entity\Calculation;
 use Praxigento\BonusBase\Data\Entity\Period;
 use Praxigento\BonusBase\Service\Period\Request\GetForDependentCalc as PeriodGetForDependentCalcRequest;
-use Praxigento\Bonus\GlobalSales\Lib\Service\ICalc;
 use Praxigento\BonusGlobalSales\Config as Cfg;
 use Praxigento\Core\Service\Base\Call as BaseCall;
 use Praxigento\Wallet\Service\Operation\Request\AddToWalletActive as WalletOperationAddToWalletActiveRequest;
@@ -22,6 +22,8 @@ class Call extends BaseCall implements ICalc
     protected $_logger;
     /** @var  \Praxigento\Core\Transaction\Database\IManager */
     protected $_manTrans;
+    /** @var  \Praxigento\BonusBase\Repo\Entity\ICompress */
+    protected $_repoBonusCompress;
     /** @var \Praxigento\Bonus\GlobalSales\Lib\Repo\IModule */
     protected $_repoMod;
     /** @var  Sub\Bonus */
@@ -33,6 +35,7 @@ class Call extends BaseCall implements ICalc
         \Psr\Log\LoggerInterface $logger,
         \Praxigento\Core\Transaction\Database\IManager $manTrans,
         \Praxigento\Bonus\GlobalSales\Lib\Repo\IModule $repoMod,
+        \Praxigento\BonusBase\Repo\Entity\ICompress $repoBonusCompress,
         \Praxigento\BonusBase\Service\IPeriod $callBasePeriod,
         \Praxigento\Wallet\Service\IOperation $callWalletOperation,
         Sub\Bonus $subBonus,
@@ -41,6 +44,7 @@ class Call extends BaseCall implements ICalc
         $this->_logger = $logger;
         $this->_manTrans = $manTrans;
         $this->_repoMod = $repoMod;
+        $this->_repoBonusCompress = $repoBonusCompress;
         $this->_callBasePeriod = $callBasePeriod;
         $this->_callWalletOperation = $callWalletOperation;
         $this->_subBonus = $subBonus;
@@ -149,7 +153,7 @@ class Call extends BaseCall implements ICalc
                 $dsBegin = $periodDataDepend[Period::ATTR_DSTAMP_BEGIN];
                 $dsEnd = $periodDataDepend[Period::ATTR_DSTAMP_END];
                 $calcIdBase = $calcDataBase[Calculation::ATTR_ID];
-                $tree = $this->_repoMod->getCompressedTree($calcIdBase);
+                $tree = $this->_repoBonusCompress->getTreeByCalcId($calcIdBase);
                 $qualData = $this->_repoMod->getQualificationData($dsBegin, $dsEnd);
                 $cfgParams = $this->_repoMod->getConfigParams();
                 $updates = $this->_subQualification->calcParams($tree, $qualData, $cfgParams, $gvMaxLevels);

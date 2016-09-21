@@ -44,12 +44,6 @@ class Module extends Db implements IModule
         $this->_repoBonusLoyalty = $repoBonusLoyalty;
     }
 
-    public function getCompressedTree($calcId)
-    {
-        $result = $this->_repoBonusBase->getCompressedTree($calcId);
-        return $result;
-    }
-
     /**
      * SELECT
      * pbbc.customer_id,

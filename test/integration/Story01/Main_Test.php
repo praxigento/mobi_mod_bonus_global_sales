@@ -5,15 +5,15 @@
 namespace Praxigento\Bonus\GlobalSales\Lib\Test\Story01;
 
 use Praxigento\Accounting\Data\Entity\Account;
-use Praxigento\BonusBase\Data\Entity\Calculation;
-use Praxigento\BonusBase\Data\Entity\Compress;
-use Praxigento\BonusBase\Data\Entity\Rank;
 use Praxigento\Bonus\GlobalSales\Lib\Entity\Cfg\Param;
 use Praxigento\Bonus\GlobalSales\Lib\Entity\Qualification;
 use Praxigento\Bonus\GlobalSales\Lib\Service\Calc\Request\Bonus as GlobalSalesCalcBonusRequest;
 use Praxigento\Bonus\GlobalSales\Lib\Service\Calc\Request\Qualification as GlobalSalesCalcQualificationRequest;
-use Praxigento\BonusLoyalty\Service\Calc\Request\Compress as LoyaltyCalcCompressRequest;
+use Praxigento\BonusBase\Data\Entity\Calculation;
+use Praxigento\BonusBase\Data\Entity\Compress;
+use Praxigento\BonusBase\Data\Entity\Rank;
 use Praxigento\BonusGlobalSales\Config as Cfg;
+use Praxigento\BonusLoyalty\Service\Calc\Request\Compress as LoyaltyCalcCompressRequest;
 use Praxigento\Core\Test\BaseIntegrationTest;
 use Praxigento\Pv\Data\Entity\Sale as PvSale;
 use Praxigento\Pv\Service\Sale\Request\AccountPv as PvSaleAccountPvRequest;
@@ -58,6 +58,8 @@ class Main_IntegrationTest extends BaseIntegrationTest
     private $_repoAcc;
     /** @var \Praxigento\BonusBase\Repo\IModule */
     private $_repoBase;
+    /** @var \Praxigento\BonusBase\Repo\Entity\IRank */
+    private $_repoBonusRank;
     /** @var  \Praxigento\Accounting\Repo\Entity\Type\IAsset */
     private $_repoTypeAsset;
     /** @var \Praxigento\Core\Repo\IGeneric */
@@ -72,6 +74,7 @@ class Main_IntegrationTest extends BaseIntegrationTest
         $this->repoBasic = $this->_manObj->get(\Praxigento\Core\Repo\IGeneric::class);
         $this->_repoTypeAsset = $this->_manObj->get(\Praxigento\Accounting\Repo\Entity\Type\IAsset::class);
         $this->_repoBase = $this->_manObj->get(\Praxigento\BonusBase\Repo\IModule::class);
+        $this->_repoBonusRank = $this->_manObj->get(\Praxigento\BonusBase\Repo\Entity\IRank::class);
         $this->_repoAcc = $this->_manObj->get(\Praxigento\Accounting\Repo\IModule::class);
     }
 
@@ -219,7 +222,7 @@ class Main_IntegrationTest extends BaseIntegrationTest
             ]
         ];
         foreach ($PARAMS as $rank => $bind) {
-            $rankId = $this->_repoBase->getRankIdByCode($rank);
+            $rankId = $this->_repoBonusRank->getIdByCode($rank);
             $bind [Param::ATTR_RANK_ID] = $rankId;
             $this->repoBasic->addEntity(Param::ENTITY_NAME, $bind);
         }
@@ -320,7 +323,7 @@ class Main_IntegrationTest extends BaseIntegrationTest
             $rankId = +$item[Qualification::ATTR_RANK_ID];
             $custNdx = $this->_mapCustomerIndexByMageId[$custId];
             $this->assertEquals($EXP_TREE[$custNdx][0], $gv);
-            $rankIdExp = ($EXP_TREE[$custNdx][1]) ? $this->_repoBase->getRankIdByCode($EXP_TREE[$custNdx][1]) : 0;
+            $rankIdExp = ($EXP_TREE[$custNdx][1]) ? $this->_repoBonusRank->getIdByCode($EXP_TREE[$custNdx][1]) : 0;
             $this->assertEquals($rankIdExp, $rankId);
         }
     }

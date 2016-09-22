@@ -24,17 +24,6 @@ interface IModule
     public function getConfigParams();
 
     /**
-     * Adapter for \Praxigento\BonusBase\Repo\Def\Module::getCalcsForPeriod
-     *
-     * @param int $calcTypeId
-     * @param string $dsBegin 'YYYYMMDD'
-     * @param string $dsEnd 'YYYYMMDD'
-     *
-     * @return array [Calculation/*]
-     */
-    public function getLatestCalcForPeriod($calcTypeId, $dsBegin, $dsEnd);
-
-    /**
      * Decorator for \Praxigento\BonusLoyalty\Repo\Def\Module::getQualificationData
      *
      * @param string $dsFrom 'YYYYMMDD'

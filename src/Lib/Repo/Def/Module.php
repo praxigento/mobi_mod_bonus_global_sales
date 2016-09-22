@@ -10,7 +10,6 @@ use Praxigento\Bonus\GlobalSales\Lib\Entity\Qualification;
 use Praxigento\Bonus\GlobalSales\Lib\Repo\decimal;
 use Praxigento\Bonus\GlobalSales\Lib\Repo\IModule;
 use Praxigento\BonusBase\Data\Entity\Compress;
-use Praxigento\BonusBase\Repo\IModule as BonusBaseRepo;
 use Praxigento\BonusLoyalty\Repo\IModule as BonusLoyaltyRepo;
 use Praxigento\Core\Repo\Def\Db;
 use Praxigento\Pv\Data\Entity\Sale as PvSale;
@@ -21,8 +20,6 @@ class Module extends Db implements IModule
     protected $_manTrans;
     /** @var \Praxigento\Core\Repo\IGeneric */
     protected $_repoBasic;
-    /** @var BonusBaseRepo */
-    protected $_repoBonusBase;
     /** @var \Praxigento\BonusBase\Repo\Entity\Log\IRank */
     protected $_repoBonusLogRank;
     /** @var BonusLoyaltyRepo */
@@ -34,7 +31,6 @@ class Module extends Db implements IModule
         \Magento\Framework\App\ResourceConnection $resource,
         \Praxigento\Core\Transaction\Database\IManager $manTrans,
         \Praxigento\Core\Repo\IGeneric $repoBasic,
-        BonusBaseRepo $repoBonusBase,
         BonusLoyaltyRepo $repoBonusLoyalty,
         \Praxigento\BonusBase\Repo\Entity\Log\IRank $repoBonusLogRank,
         \Praxigento\Core\Tool\IPeriod $toolPeriod
@@ -42,7 +38,6 @@ class Module extends Db implements IModule
         parent::__construct($resource);
         $this->_manTrans = $manTrans;
         $this->_repoBasic = $repoBasic;
-        $this->_repoBonusBase = $repoBonusBase;
         $this->_repoBonusLoyalty = $repoBonusLoyalty;
         $this->_repoBonusLogRank = $repoBonusLogRank;
         $this->_toolPeriod = $toolPeriod;
@@ -95,13 +90,6 @@ class Module extends Db implements IModule
             $rankId = $item[Param::ATTR_RANK_ID];
             $result[$rankId] = $item;
         }
-        return $result;
-    }
-
-    public function getLatestCalcForPeriod($calcTypeId, $dsBegin, $dsEnd)
-    {
-        $shouldGetLatestCalc = true;
-        $result = $this->_repoBonusBase->getCalcsForPeriod($calcTypeId, $dsBegin, $dsEnd, $shouldGetLatestCalc);
         return $result;
     }
 

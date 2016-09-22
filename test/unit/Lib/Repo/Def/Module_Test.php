@@ -9,7 +9,8 @@ use Praxigento\Bonus\GlobalSales\Lib\Entity\Cfg\Param;
 
 include_once(__DIR__ . '/../../../phpunit_bootstrap.php');
 
-class Module_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery {
+class Module_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
+{
     /** @var  \Mockery\MockInterface */
     private $mConn;
     /** @var  \Mockery\MockInterface */
@@ -25,7 +26,8 @@ class Module_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery {
     /** @var  Module */
     private $repo;
 
-    protected function setUp() {
+    protected function setUp()
+    {
         parent::setUp();
         $this->markTestSkipped('Test is deprecated after M1 & M2 merge is done.');
         $this->mConn = $this->_mockDba();
@@ -42,7 +44,8 @@ class Module_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery {
         );
     }
 
-    public function test_getCompressedTreeWithQualifications() {
+    public function test_getCompressedTreeWithQualifications()
+    {
         /** === Test Data === */
         $CALC_ID = 2;
         $RESULT = 'result';
@@ -69,11 +72,12 @@ class Module_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery {
         $this->assertEquals($RESULT, $resp);
     }
 
-    public function test_getConfigParams() {
+    public function test_getConfigParams()
+    {
         /** === Test Data === */
         $RANK_ID = 2;
         $DATA = [
-            [ Param::ATTR_RANK_ID => $RANK_ID ]
+            [Param::ATTR_RANK_ID => $RANK_ID]
         ];
 
         /** === Setup Mocks === */
@@ -87,26 +91,8 @@ class Module_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery {
         $this->assertEquals($RANK_ID, $resp[$RANK_ID][Param::ATTR_RANK_ID]);
     }
 
-    public function test_getLatestCalcForPeriod() {
-        /** === Test Data === */
-        $CALC_TYPE_ID = 2;
-        $DS_BEGIN = 'ds begin';
-        $DS_END = 'ds end';
-        $RESULT = 'result';
-
-        /** === Setup Mocks === */
-        // $result = $this->_repoBonusBase->getCalcsForPeriod($calcTypeId, $dsBegin, $dsEnd, $shouldGetLatestCalc);
-        $this->mRepoBonusBase
-            ->shouldReceive('getCalcsForPeriod')
-            ->with($CALC_TYPE_ID, $DS_BEGIN, $DS_END, true)
-            ->andReturn($RESULT);
-
-        /** === Call and asserts  === */
-        $resp = $this->repo->getLatestCalcForPeriod($CALC_TYPE_ID, $DS_BEGIN, $DS_END);
-        $this->assertEquals($RESULT, $resp);
-    }
-
-    public function test_getQualificationData() {
+    public function test_getQualificationData()
+    {
         /** === Test Data === */
         $DS_BEGIN = 'ds begin';
         $DS_END = 'ds end';
@@ -124,7 +110,8 @@ class Module_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery {
         $this->assertEquals($RESULT, $resp);
     }
 
-    public function test_getSalesOrdersPvForPeriod() {
+    public function test_getSalesOrdersPvForPeriod()
+    {
         /** === Test Data === */
         $DS_BEGIN = 'ds begin';
         $DS_END = 'ds end';
@@ -166,9 +153,10 @@ class Module_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery {
         $this->assertEquals($RESULT, $resp);
     }
 
-    public function test_saveLogRanks() {
+    public function test_saveLogRanks()
+    {
         /** === Test Data === */
-        $LOGS = [ 1 => 11, 2 => 22 ];
+        $LOGS = [1 => 11, 2 => 22];
 
         /** === Setup Mocks === */
         $this->mRepoBonusBase
@@ -182,9 +170,10 @@ class Module_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery {
         $this->repo->saveLogRanks($LOGS);
     }
 
-    public function test_saveQualificationParams_commit() {
+    public function test_saveQualificationParams_commit()
+    {
         /** === Test Data === */
-        $UPDATES = [ [ ] ];
+        $UPDATES = [[]];
 
         /** === Setup Mocks === */
         $this->mConn->shouldReceive('beginTransaction')->once();
@@ -199,9 +188,10 @@ class Module_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery {
     /**
      * @expectedException \Exception
      */
-    public function test_saveQualificationParams_rollback() {
+    public function test_saveQualificationParams_rollback()
+    {
         /** === Test Data === */
-        $UPDATES = [ [ ] ];
+        $UPDATES = [[]];
 
         /** === Setup Mocks === */
         $this->mConn->shouldReceive('beginTransaction')->once();

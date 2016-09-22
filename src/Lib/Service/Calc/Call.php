@@ -112,8 +112,9 @@ class Call extends BaseCall implements ICalc
                 $dsEnd = $periodDataDepend->getDstampEnd();
                 /* collect data to process bonus */
                 $calcTypeIdCompress = $this->_repoBonusTypeCalc->getIdByCode(Cfg::CODE_TYPE_CALC_COMPRESSION);
-                $calcDataCompress = $this->_repoMod->getLatestCalcForPeriod($calcTypeIdCompress, $dsBegin, $dsEnd);
-                $calcIdCompress = $calcDataCompress[Calculation::ATTR_ID];
+                $calcDataCompress = $this->_repoBonusService
+                    ->getLastCalcForPeriodByDates($calcTypeIdCompress, $dsBegin, $dsEnd);
+                $calcIdCompress = $calcDataCompress->getId();
                 $params = $this->_repoMod->getConfigParams();
                 $treeCompressed = $this->_repoMod->getCompressedTreeWithQualifications($calcIdCompress);
                 $pvTotal = $this->_repoMod->getSalesOrdersPvForPeriod($dsBegin, $dsEnd);

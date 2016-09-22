@@ -139,7 +139,9 @@ class Call extends BaseCall implements ICalc
         $datePerformed = $req->getDatePerformed();
         $dateApplied = $req->getDateApplied();
         $gvMaxLevels = $req->getGvMaxLevels();
-        $this->_logger->info("'Qualification for Global Sales' calculation is started. Performed at: $datePerformed, applied at: $dateApplied.");
+        $msg = "'Qualification for Global Sales' calculation is started. "
+            . "Performed at: $datePerformed, applied at: $dateApplied.";
+        $this->_logger->info($msg);
         $reqGetPeriod = new PeriodGetForDependentCalcRequest();
         $calcTypeBase = Cfg::CODE_TYPE_CALC_COMPRESSION;
         $calcType = Cfg::CODE_TYPE_CALC_QUALIFICATION;

@@ -6,7 +6,6 @@ namespace Praxigento\Bonus\GlobalSales\Lib\Service\Calc;
 
 use Praxigento\Bonus\GlobalSales\Lib\Service\ICalc;
 use Praxigento\BonusBase\Data\Entity\Calculation;
-use Praxigento\BonusBase\Data\Entity\Period;
 use Praxigento\BonusBase\Service\Period\Request\GetForDependentCalc as PeriodGetForDependentCalcRequest;
 use Praxigento\BonusGlobalSales\Config as Cfg;
 use Praxigento\Core\Service\Base\Call as BaseCall;
@@ -104,9 +103,9 @@ class Call extends BaseCall implements ICalc
             try {
                 $periodDataDepend = $respGetPeriod->getDependentPeriodData();
                 $calcDataDepend = $respGetPeriod->getDependentCalcData();
-                $calcIdDepend = $calcDataDepend[Calculation::ATTR_ID];
-                $dsBegin = $periodDataDepend[Period::ATTR_DSTAMP_BEGIN];
-                $dsEnd = $periodDataDepend[Period::ATTR_DSTAMP_END];
+                $calcIdDepend = $calcDataDepend->getId();
+                $dsBegin = $periodDataDepend->getDstampBegin();
+                $dsEnd = $periodDataDepend->getDstampEnd();
                 /* collect data to process bonus */
                 $calcTypeIdCompress = $this->_repoMod->getTypeCalcIdByCode(Cfg::CODE_TYPE_CALC_COMPRESSION);
                 $calcDataCompress = $this->_repoMod->getLatestCalcForPeriod($calcTypeIdCompress, $dsBegin, $dsEnd);
@@ -123,7 +122,7 @@ class Call extends BaseCall implements ICalc
                 /* mark calculation as completed and finalize bonus */
                 $this->_repoBonusService->markCalcComplete($calcIdDepend);
                 $this->_manTrans->commit($def);
-                $result->setPeriodId($periodDataDepend[Period::ATTR_ID]);
+                $result->setPeriodId($periodDataDepend->getId());
                 $result->setCalcId($calcIdDepend);
                 $result->markSucceed();
             } finally {
@@ -152,11 +151,11 @@ class Call extends BaseCall implements ICalc
             try {
                 $periodDataDepend = $respGetPeriod->getDependentPeriodData();
                 $calcDataDepend = $respGetPeriod->getDependentCalcData();
-                $calcIdDepend = $calcDataDepend[Calculation::ATTR_ID];
+                $calcIdDepend = $calcDataDepend->getId();
                 $calcDataBase = $respGetPeriod->getBaseCalcData();
-                $dsBegin = $periodDataDepend[Period::ATTR_DSTAMP_BEGIN];
-                $dsEnd = $periodDataDepend[Period::ATTR_DSTAMP_END];
-                $calcIdBase = $calcDataBase[Calculation::ATTR_ID];
+                $dsBegin = $periodDataDepend->getDstampBegin();
+                $dsEnd = $periodDataDepend->getDstampEnd();
+                $calcIdBase = $calcDataBase->getId();
                 $tree = $this->_repoBonusCompress->getTreeByCalcId($calcIdBase);
                 $qualData = $this->_repoMod->getQualificationData($dsBegin, $dsEnd);
                 $cfgParams = $this->_repoMod->getConfigParams();
@@ -164,7 +163,7 @@ class Call extends BaseCall implements ICalc
                 $this->_repoMod->saveQualificationParams($updates);
                 $this->_repoBonusService->markCalcComplete($calcIdDepend);
                 $this->_manTrans->commit($def);
-                $result->setPeriodId($periodDataDepend[Period::ATTR_ID]);
+                $result->setPeriodId($periodDataDepend->getId());
                 $result->setCalcId($calcIdDepend);
                 $result->markSucceed();
             } finally {

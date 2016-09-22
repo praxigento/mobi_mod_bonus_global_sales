@@ -141,12 +141,6 @@ class Module extends Db implements IModule
         return $result;
     }
 
-    public function getTypeCalcIdByCode($calcTypeCode)
-    {
-        $result = $this->_repoBonusBase->getTypeCalcIdByCode($calcTypeCode);
-        return $result;
-    }
-
     public function saveLogRanks($logs)
     {
         foreach ($logs as $transRef => $rankRef) {

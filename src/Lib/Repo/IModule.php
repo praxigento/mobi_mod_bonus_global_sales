@@ -55,15 +55,6 @@ interface IModule
     function getSalesOrdersPvForPeriod($dsFrom, $dsTo);
 
     /**
-     * Decorator for \Praxigento\BonusBase\Repo\IModule::getTypeCalcIdByCode
-     *
-     * @param string $calcTypeCode
-     *
-     * @return int
-     */
-    public function getTypeCalcIdByCode($calcTypeCode);
-
-    /**
      * Save relations between transactions and ranks into log.
      *
      * @param array $logs

@@ -17,16 +17,18 @@ use Praxigento\Pv\Data\Entity\Sale as PvSale;
 
 class Module extends Db implements IModule
 {
-    /** @var BonusBaseRepo */
-    protected $_repoBonusBase;
-    /** @var BonusLoyaltyRepo */
-    protected $_repoBonusLoyalty;
-    /** @var  \Praxigento\Core\Tool\IPeriod */
-    protected $_toolPeriod;
-    /** @var  \Praxigento\Core\Transaction\Database\IManager */
+    /** @var \Praxigento\Core\Transaction\Database\IManager */
     protected $_manTrans;
     /** @var \Praxigento\Core\Repo\IGeneric */
     protected $_repoBasic;
+    /** @var BonusBaseRepo */
+    protected $_repoBonusBase;
+    /** @var \Praxigento\BonusBase\Repo\Entity\Log\IRank */
+    protected $_repoBonusLogRank;
+    /** @var BonusLoyaltyRepo */
+    protected $_repoBonusLoyalty;
+    /** @var \Praxigento\Core\Tool\IPeriod */
+    protected $_toolPeriod;
 
     public function __construct(
         \Magento\Framework\App\ResourceConnection $resource,
@@ -34,14 +36,16 @@ class Module extends Db implements IModule
         \Praxigento\Core\Repo\IGeneric $repoBasic,
         BonusBaseRepo $repoBonusBase,
         BonusLoyaltyRepo $repoBonusLoyalty,
+        \Praxigento\BonusBase\Repo\Entity\Log\IRank $repoBonusLogRank,
         \Praxigento\Core\Tool\IPeriod $toolPeriod
     ) {
         parent::__construct($resource);
         $this->_manTrans = $manTrans;
         $this->_repoBasic = $repoBasic;
-        $this->_toolPeriod = $toolPeriod;
         $this->_repoBonusBase = $repoBonusBase;
         $this->_repoBonusLoyalty = $repoBonusLoyalty;
+        $this->_repoBonusLogRank = $repoBonusLogRank;
+        $this->_toolPeriod = $toolPeriod;
     }
 
     /**
@@ -146,7 +150,11 @@ class Module extends Db implements IModule
     public function saveLogRanks($logs)
     {
         foreach ($logs as $transRef => $rankRef) {
-            $this->_repoBonusBase->logRank($transRef, $rankRef);
+            $data = [
+                \Praxigento\BonusBase\Data\Entity\Log\Rank::ATTR_TRANS_REF => $transRef,
+                \Praxigento\BonusBase\Data\Entity\Log\Rank::ATTR_RANK_REF => $rankRef
+            ];
+            $this->_repoBonusLogRank->create($data);
         }
     }
 
@@ -163,9 +171,4 @@ class Module extends Db implements IModule
         }
     }
 
-    public function updateCalcSetComplete($calcId)
-    {
-        $result = $this->_repoBonusBase->updateCalcSetComplete($calcId);
-        return $result;
-    }
 }

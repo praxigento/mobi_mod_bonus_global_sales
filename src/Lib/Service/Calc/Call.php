@@ -24,6 +24,8 @@ class Call extends BaseCall implements ICalc
     protected $_manTrans;
     /** @var  \Praxigento\BonusBase\Repo\Entity\ICompress */
     protected $_repoBonusCompress;
+    /** @var \Praxigento\BonusBase\Repo\Service\IModule */
+    protected $_repoBonusService;
     /** @var \Praxigento\Bonus\GlobalSales\Lib\Repo\IModule */
     protected $_repoMod;
     /** @var  Sub\Bonus */
@@ -35,6 +37,7 @@ class Call extends BaseCall implements ICalc
         \Psr\Log\LoggerInterface $logger,
         \Praxigento\Core\Transaction\Database\IManager $manTrans,
         \Praxigento\Bonus\GlobalSales\Lib\Repo\IModule $repoMod,
+        \Praxigento\BonusBase\Repo\Service\IModule $repoBonusService,
         \Praxigento\BonusBase\Repo\Entity\ICompress $repoBonusCompress,
         \Praxigento\BonusBase\Service\IPeriod $callBasePeriod,
         \Praxigento\Wallet\Service\IOperation $callWalletOperation,
@@ -44,6 +47,7 @@ class Call extends BaseCall implements ICalc
         $this->_logger = $logger;
         $this->_manTrans = $manTrans;
         $this->_repoMod = $repoMod;
+        $this->_repoBonusService = $repoBonusService;
         $this->_repoBonusCompress = $repoBonusCompress;
         $this->_callBasePeriod = $callBasePeriod;
         $this->_callWalletOperation = $callWalletOperation;
@@ -117,7 +121,7 @@ class Call extends BaseCall implements ICalc
                 $transLog = $respAdd->getTransactionsIds();
                 $this->_repoMod->saveLogRanks($transLog);
                 /* mark calculation as completed and finalize bonus */
-                $this->_repoMod->updateCalcSetComplete($calcIdDepend);
+                $this->_repoBonusService->markCalcComplete($calcIdDepend);
                 $this->_manTrans->commit($def);
                 $result->setPeriodId($periodDataDepend[Period::ATTR_ID]);
                 $result->setCalcId($calcIdDepend);
@@ -158,7 +162,7 @@ class Call extends BaseCall implements ICalc
                 $cfgParams = $this->_repoMod->getConfigParams();
                 $updates = $this->_subQualification->calcParams($tree, $qualData, $cfgParams, $gvMaxLevels);
                 $this->_repoMod->saveQualificationParams($updates);
-                $this->_repoMod->updateCalcSetComplete($calcIdDepend);
+                $this->_repoBonusService->markCalcComplete($calcIdDepend);
                 $this->_manTrans->commit($def);
                 $result->setPeriodId($periodDataDepend[Period::ATTR_ID]);
                 $result->setCalcId($calcIdDepend);

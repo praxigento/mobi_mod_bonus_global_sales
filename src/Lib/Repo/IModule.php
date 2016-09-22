@@ -76,11 +76,4 @@ interface IModule
      */
     public function saveQualificationParams($updates);
 
-    /**
-     * Decorator for \Praxigento\BonusBase\Repo\IModule::updateCalcSetComplete
-     *
-     * @param $calcId
-     */
-    public function updateCalcSetComplete($calcId);
-
 }

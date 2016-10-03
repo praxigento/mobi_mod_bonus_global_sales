@@ -4,14 +4,18 @@
  */
 namespace Praxigento\Bonus\GlobalSales\Lib\Service\Calc;
 
-use Praxigento\Bonus\GlobalSales\Lib\Service\ICalc;
-use Praxigento\BonusBase\Data\Entity\Calculation;
 use Praxigento\BonusBase\Service\Period\Request\GetForDependentCalc as PeriodGetForDependentCalcRequest;
 use Praxigento\BonusGlobalSales\Config as Cfg;
-use Praxigento\Core\Service\Base\Call as BaseCall;
 use Praxigento\Wallet\Service\Operation\Request\AddToWalletActive as WalletOperationAddToWalletActiveRequest;
 
-class Call extends BaseCall implements ICalc
+/**
+ * @SuppressWarnings(PHPMD.CamelCasePropertyName)
+ * @SuppressWarnings(PHPMD.CamelCaseMethodName)
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+ */
+class Call
+    extends \Praxigento\Core\Service\Base\Call
+    implements \Praxigento\Bonus\GlobalSales\Lib\Service\ICalc
 {
     /** @var  \Praxigento\BonusBase\Service\IPeriod */
     protected $_callBasePeriod;
@@ -34,8 +38,25 @@ class Call extends BaseCall implements ICalc
     /** @var Sub\Qualification */
     protected $_subQualification;
 
+    /**
+     * Call constructor.
+     * @param \Psr\Log\LoggerInterface $logger
+     * @param \Magento\Framework\ObjectManagerInterface $manObj
+     * @param \Praxigento\Core\Transaction\Database\IManager $manTrans
+     * @param \Praxigento\Bonus\GlobalSales\Lib\Repo\IModule $repoMod
+     * @param \Praxigento\BonusBase\Repo\Service\IModule $repoBonusService
+     * @param \Praxigento\BonusBase\Repo\Entity\ICompress $repoBonusCompress
+     * @param \Praxigento\BonusBase\Repo\Entity\Type\ICalc $repoBonusTypeCalc
+     * @param \Praxigento\BonusBase\Service\IPeriod $callBasePeriod
+     * @param \Praxigento\Wallet\Service\IOperation $callWalletOperation
+     * @param Sub\Bonus $subBonus
+     * @param Sub\Qualification $subQual
+     *
+     * @SuppressWarnings(PHPMD.ExcessiveParameterList)
+     */
     public function __construct(
         \Psr\Log\LoggerInterface $logger,
+        \Magento\Framework\ObjectManagerInterface $manObj,
         \Praxigento\Core\Transaction\Database\IManager $manTrans,
         \Praxigento\Bonus\GlobalSales\Lib\Repo\IModule $repoMod,
         \Praxigento\BonusBase\Repo\Service\IModule $repoBonusService,
@@ -46,7 +67,7 @@ class Call extends BaseCall implements ICalc
         Sub\Bonus $subBonus,
         Sub\Qualification $subQual
     ) {
-        $this->_logger = $logger;
+        parent::__construct($logger, $manObj);
         $this->_manTrans = $manTrans;
         $this->_repoMod = $repoMod;
         $this->_repoBonusService = $repoBonusService;

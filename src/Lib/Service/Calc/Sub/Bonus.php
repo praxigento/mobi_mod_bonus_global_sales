@@ -5,9 +5,8 @@
 
 namespace Praxigento\Bonus\GlobalSales\Lib\Service\Calc\Sub;
 
-use Praxigento\BonusBase\Data\Entity\Compress;
 use Praxigento\Bonus\GlobalSales\Lib\Entity\Cfg\Param;
-use Praxigento\Bonus\GlobalSales\Lib\Entity\Qualification;
+use Praxigento\BonusBase\Data\Entity\Compress;
 use Praxigento\Pv\Data\Entity\Sale as PvSale;
 
 class Bonus {
@@ -65,8 +64,8 @@ class Bonus {
         $mapRanks = [ ];
         foreach($tree as $customer) {
             $custId = $customer[Compress::ATTR_CUSTOMER_ID];
-            $gvQual = $customer[Qualification::ATTR_GV];
-            $rankQual = $customer[Qualification::ATTR_RANK_ID];
+            $gvQual = $customer[\Praxigento\Bonus\GlobalSales\Lib\Entity\Qualification::ATTR_GV];
+            $rankQual = $customer[\Praxigento\Bonus\GlobalSales\Lib\Entity\Qualification::ATTR_RANK_ID];
             foreach($params as $rankId => $param) {
                 $gvMax = $mapMaxGvPerRank[$rankId];
                 $gv = ($gvQual > $gvMax) ? $gvMax : $gvQual;

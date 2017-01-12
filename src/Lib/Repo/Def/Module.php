@@ -61,10 +61,10 @@ class Module extends Db implements IModule
         /* aliases and tables */
         $asQual = 'pbgq';
         $asCompress = 'pbbc';
-        $tblQual = $this->_resource->getTableName(Qualification::ENTITY_NAME);
-        $tblCompress = $this->_resource->getTableName(Compress::ENTITY_NAME);
+        $tblQual = $this->resource->getTableName(Qualification::ENTITY_NAME);
+        $tblCompress = $this->resource->getTableName(Compress::ENTITY_NAME);
         // SELECT FROM prxgt_bon_globsal_qual pbgq
-        $query = $this->_conn->select();
+        $query = $this->conn->select();
         $query->from([$asQual => $tblQual], [Qualification::ATTR_GV, Qualification::ATTR_RANK_ID]);
         // LEFT JOIN prxgt_bon_base_compress pbbc ON pbbc.id = pbgq.compress_id
         $on = "$asCompress." . Compress::ATTR_ID . "=$asQual." . Qualification::ATTR_COMPRESS_ID;
@@ -77,7 +77,7 @@ class Module extends Db implements IModule
         $where = $asCompress . '.' . Compress::ATTR_CALC_ID . '=' . (int)$calcId;
         $query->where($where);
         // $sql = (string)$query;
-        $result = $this->_conn->fetchAll($query);
+        $result = $this->conn->fetchAll($query);
         return $result;
     }
 
@@ -116,16 +116,16 @@ class Module extends Db implements IModule
         /* aliases and tables */
         $asSummary = 'summary';
         $asPv = 'pps';
-        $tblPv = $this->_resource->getTableName(PvSale::ENTITY_NAME);
+        $tblPv = $this->resource->getTableName(PvSale::ENTITY_NAME);
         // SELECT FROM prxgt_pv_sale pps
-        $query = $this->_conn->select();
+        $query = $this->conn->select();
         $query->from([$asPv => $tblPv], [$asSummary => 'SUM(' . PvSale::ATTR_TOTAL . ')']);
         // where
-        $whereFrom = $asPv . '.' . PvSale::ATTR_DATE_PAID . '>=' . $this->_conn->quote($tsFrom);
-        $whereTo = $asPv . '.' . PvSale::ATTR_DATE_PAID . '<=' . $this->_conn->quote($tsTo);
+        $whereFrom = $asPv . '.' . PvSale::ATTR_DATE_PAID . '>=' . $this->conn->quote($tsFrom);
+        $whereTo = $asPv . '.' . PvSale::ATTR_DATE_PAID . '<=' . $this->conn->quote($tsTo);
         $query->where("$whereFrom AND $whereTo");
         // $sql = (string)$query;
-        $result = $this->_conn->fetchOne($query);
+        $result = $this->conn->fetchOne($query);
         return $result;
     }
 

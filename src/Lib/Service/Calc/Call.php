@@ -22,7 +22,7 @@ class Call
     /** @var  \Praxigento\Wallet\Service\IOperation */
     protected $_callWalletOperation;
     /** @var \Psr\Log\LoggerInterface */
-    protected $_logger;
+    protected $logger;
     /** @var  \Praxigento\Core\Transaction\Database\IManager */
     protected $_manTrans;
     /** @var  \Praxigento\BonusBase\Repo\Entity\ICompress */
@@ -116,7 +116,7 @@ class Call
         $result = new Response\Bonus();
         $datePerformed = $req->getDatePerformed();
         $dateApplied = $req->getDateApplied();
-        $this->_logger->info("'Global Sales Bonus' calculation is started. Performed at: $datePerformed, applied at: $dateApplied.");
+        $this->logger->info("'Global Sales Bonus' calculation is started. Performed at: $datePerformed, applied at: $dateApplied.");
         $reqGetPeriod = new PeriodGetForDependentCalcRequest();
         $calcTypeBase = Cfg::CODE_TYPE_CALC_QUALIFICATION;
         $calcType = Cfg::CODE_TYPE_CALC_BONUS;
@@ -155,7 +155,7 @@ class Call
                 $this->_manTrans->end($def);
             }
         }
-        $this->_logger->info("'Global Sales Bonus' calculation is complete.");
+        $this->logger->info("'Global Sales Bonus' calculation is complete.");
         return $result;
     }
 
@@ -167,7 +167,7 @@ class Call
         $gvMaxLevels = $req->getGvMaxLevels();
         $msg = "'Qualification for Global Sales' calculation is started. "
             . "Performed at: $datePerformed, applied at: $dateApplied.";
-        $this->_logger->info($msg);
+        $this->logger->info($msg);
         $reqGetPeriod = new PeriodGetForDependentCalcRequest();
         $calcTypeBase = Cfg::CODE_TYPE_CALC_COMPRESSION;
         $calcType = Cfg::CODE_TYPE_CALC_QUALIFICATION;
@@ -198,7 +198,7 @@ class Call
                 $this->_manTrans->end($def);
             }
         }
-        $this->_logger->info("'Qualification for Global Sales' calculation is complete.");
+        $this->logger->info("'Qualification for Global Sales' calculation is complete.");
         return $result;
     }
 }

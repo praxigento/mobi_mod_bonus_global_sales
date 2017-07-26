@@ -20,7 +20,7 @@ class Module extends Db implements IModule
     protected $_manTrans;
     /** @var \Praxigento\Core\Repo\IGeneric */
     protected $_repoBasic;
-    /** @var \Praxigento\BonusBase\Repo\Entity\Log\Def\Rank */
+    /** @var \Praxigento\BonusBase\Repo\Entity\Log\Rank */
     protected $_repoBonusLogRank;
     /** @var BonusLoyaltyRepo */
     protected $_repoBonusLoyalty;
@@ -32,7 +32,7 @@ class Module extends Db implements IModule
         \Praxigento\Core\Transaction\Database\IManager $manTrans,
         \Praxigento\Core\Repo\IGeneric $repoBasic,
         BonusLoyaltyRepo $repoBonusLoyalty,
-        \Praxigento\BonusBase\Repo\Entity\Log\Def\Rank $repoBonusLogRank,
+        \Praxigento\BonusBase\Repo\Entity\Log\Rank $repoBonusLogRank,
         \Praxigento\Core\Tool\IPeriod $toolPeriod
     ) {
         parent::__construct($resource);

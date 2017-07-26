@@ -21,15 +21,13 @@ class Call
     protected $_callBasePeriod;
     /** @var  \Praxigento\Wallet\Service\IOperation */
     protected $_callWalletOperation;
-    /** @var \Psr\Log\LoggerInterface */
-    protected $logger;
     /** @var  \Praxigento\Core\Transaction\Database\IManager */
     protected $_manTrans;
-    /** @var  \Praxigento\BonusBase\Repo\Entity\ICompress */
+    /** @var  \Praxigento\BonusBase\Repo\Entity\Def\Compress */
     protected $_repoBonusCompress;
     /** @var \Praxigento\BonusBase\Repo\Service\IModule */
     protected $_repoBonusService;
-    /** @var \Praxigento\BonusBase\Repo\Entity\Type\ICalc */
+    /** @var \Praxigento\BonusBase\Repo\Entity\Type\Def\Calc */
     protected $_repoBonusTypeCalc;
     /** @var \Praxigento\Bonus\GlobalSales\Lib\Repo\IModule */
     protected $_repoMod;
@@ -37,6 +35,8 @@ class Call
     protected $_subBonus;
     /** @var Sub\Qualification */
     protected $_subQualification;
+    /** @var \Psr\Log\LoggerInterface */
+    protected $logger;
 
     /**
      * Call constructor.
@@ -45,8 +45,8 @@ class Call
      * @param \Praxigento\Core\Transaction\Database\IManager $manTrans
      * @param \Praxigento\Bonus\GlobalSales\Lib\Repo\IModule $repoMod
      * @param \Praxigento\BonusBase\Repo\Service\IModule $repoBonusService
-     * @param \Praxigento\BonusBase\Repo\Entity\ICompress $repoBonusCompress
-     * @param \Praxigento\BonusBase\Repo\Entity\Type\ICalc $repoBonusTypeCalc
+     * @param \Praxigento\BonusBase\Repo\Entity\Def\Compress $repoBonusCompress
+     * @param \Praxigento\BonusBase\Repo\Entity\Type\Def\Calc $repoBonusTypeCalc
      * @param \Praxigento\BonusBase\Service\IPeriod $callBasePeriod
      * @param \Praxigento\Wallet\Service\IOperation $callWalletOperation
      * @param Sub\Bonus $subBonus
@@ -60,8 +60,8 @@ class Call
         \Praxigento\Core\Transaction\Database\IManager $manTrans,
         \Praxigento\Bonus\GlobalSales\Lib\Repo\IModule $repoMod,
         \Praxigento\BonusBase\Repo\Service\IModule $repoBonusService,
-        \Praxigento\BonusBase\Repo\Entity\ICompress $repoBonusCompress,
-        \Praxigento\BonusBase\Repo\Entity\Type\ICalc $repoBonusTypeCalc,
+        \Praxigento\BonusBase\Repo\Entity\Def\Compress $repoBonusCompress,
+        \Praxigento\BonusBase\Repo\Entity\Type\Def\Calc $repoBonusTypeCalc,
         \Praxigento\BonusBase\Service\IPeriod $callBasePeriod,
         \Praxigento\Wallet\Service\IOperation $callWalletOperation,
         Sub\Bonus $subBonus,

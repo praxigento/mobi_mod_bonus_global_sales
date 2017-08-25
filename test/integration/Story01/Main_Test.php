@@ -4,7 +4,7 @@
  */
 namespace Praxigento\Bonus\GlobalSales\Lib\Test\Story01;
 
-use Praxigento\Accounting\Data\Entity\Account;
+use Praxigento\Accounting\Repo\Entity\Data\Account;
 use Praxigento\Bonus\GlobalSales\Lib\Entity\Cfg\Param;
 use Praxigento\Bonus\GlobalSales\Lib\Entity\Qualification;
 use Praxigento\Bonus\GlobalSales\Lib\Service\Calc\Request\Bonus as GlobalSalesCalcBonusRequest;

@@ -9,7 +9,7 @@ use Praxigento\Bonus\GlobalSales\Lib\Entity\Cfg\Param;
 use Praxigento\Bonus\GlobalSales\Lib\Entity\Qualification;
 use Praxigento\Bonus\GlobalSales\Lib\Repo\decimal;
 use Praxigento\Bonus\GlobalSales\Lib\Repo\IModule;
-use Praxigento\BonusBase\Data\Entity\Compress;
+use Praxigento\BonusBase\Repo\Entity\Data\Compress;
 use Praxigento\BonusLoyalty\Repo\IModule as BonusLoyaltyRepo;
 use Praxigento\Core\Repo\Def\Db;
 use Praxigento\Pv\Data\Entity\Sale as PvSale;
@@ -133,8 +133,8 @@ class Module extends Db implements IModule
     {
         foreach ($logs as $transRef => $rankRef) {
             $data = [
-                \Praxigento\BonusBase\Data\Entity\Log\Rank::ATTR_TRANS_REF => $transRef,
-                \Praxigento\BonusBase\Data\Entity\Log\Rank::ATTR_RANK_REF => $rankRef
+                \Praxigento\BonusBase\Repo\Entity\Data\Log\Rank::ATTR_TRANS_REF => $transRef,
+                \Praxigento\BonusBase\Repo\Entity\Data\Log\Rank::ATTR_RANK_REF => $rankRef
             ];
             $this->_repoBonusLogRank->create($data);
         }

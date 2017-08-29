@@ -7,7 +7,7 @@
 namespace Praxigento\BonusGlobalSales\Setup;
 
 use Praxigento\Accounting\Repo\Entity\Data\Type\Operation as TypeOperation;
-use Praxigento\BonusBase\Data\Entity\Type\Calc as TypeCalc;
+use Praxigento\BonusBase\Repo\Entity\Data\Type\Calc as TypeCalc;
 use Praxigento\BonusGlobalSales\Config as Cfg;
 
 class InstallData extends \Praxigento\Core\Setup\Data\Base

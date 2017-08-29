@@ -7,9 +7,9 @@
 
 namespace Praxigento\Bonus\GlobalSales\Lib\Service\Calc\Sub;
 
-use Praxigento\BonusBase\Data\Entity\Compress;
 use Praxigento\Bonus\GlobalSales\Lib\Entity\Cfg\Param;
 use Praxigento\Bonus\GlobalSales\Lib\Entity\Qualification as EntityQual;
+use Praxigento\BonusBase\Repo\Entity\Data\Compress;
 use Praxigento\Downline\Data\Entity\Snap;
 use Praxigento\Downline\Service\Map\Request\ById as DownlineMapByIdRequest;
 use Praxigento\Downline\Service\Map\Request\TreeByDepth as DownlineMapTreeByDepthRequest;

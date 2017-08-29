@@ -6,12 +6,11 @@
 namespace Praxigento\Bonus\GlobalSales\Lib\Service\Calc\Sub;
 
 use Praxigento\Bonus\GlobalSales\Lib\Entity\Cfg\Param;
-use Praxigento\BonusBase\Data\Entity\Compress;
-use Praxigento\Pv\Data\Entity\Sale as PvSale;
+use Praxigento\BonusBase\Repo\Entity\Data\Compress;
 
 class Bonus {
-    const AS_IS_PRORATED = 'isProrated';
     const AS_AMOUNT_TOTAL = 'amountTotal';
+    const AS_IS_PRORATED = 'isProrated';
     const AS_MEMBERS = 'members';
     const AS_TOTAL_GV = 'totalGv';
     /** @var  \Praxigento\Core\Tool\IFormat */
@@ -27,6 +26,20 @@ class Bonus {
         $this->_toolFormat = $toolFormat;
     }
 
+    private function _mapPayoutsByRank($pvTotal, $params)
+    {
+        $result = [];
+        foreach ($params as $param) {
+            $rankId = $param[Param::ATTR_RANK_ID];
+            $percent = $param[Param::ATTR_PERCENT];
+            $isProrated = $param[Param::ATTR_IS_PRORATED];
+            $bonus = $this->_toolFormat->roundBonus($pvTotal * $percent);
+            $result[$rankId][self::AS_AMOUNT_TOTAL] = $bonus;
+            $result[$rankId][self::AS_IS_PRORATED] = (bool)$isProrated;
+        }
+        return $result;
+    }
+
     private function _mapRankMaxGv($params) {
         $result = [ ];
         $prevRank = null;
@@ -39,19 +52,6 @@ class Bonus {
             $prevRank = $rank;
         }
         $result[$prevRank] = PHP_INT_MAX;
-        return $result;
-    }
-
-    private function _mapPayoutsByRank($pvTotal, $params) {
-        $result = [ ];
-        foreach($params as $param) {
-            $rankId = $param[Param::ATTR_RANK_ID];
-            $percent = $param[Param::ATTR_PERCENT];
-            $isProrated = $param[Param::ATTR_IS_PRORATED];
-            $bonus = $this->_toolFormat->roundBonus($pvTotal * $percent);
-            $result[$rankId][self::AS_AMOUNT_TOTAL] = $bonus;
-            $result[$rankId][self::AS_IS_PRORATED] = (bool)$isProrated;
-        }
         return $result;
     }
 

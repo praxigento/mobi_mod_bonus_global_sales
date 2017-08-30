@@ -15,7 +15,7 @@ use Praxigento\BonusBase\Repo\Entity\Data\Rank;
 use Praxigento\BonusGlobalSales\Config as Cfg;
 use Praxigento\BonusLoyalty\Service\Calc\Request\Compress as LoyaltyCalcCompressRequest;
 use Praxigento\Core\Test\BaseIntegrationTest;
-use Praxigento\Pv\Data\Entity\Sale as PvSale;
+use Praxigento\Pv\Repo\Entity\Data\Sale as PvSale;
 use Praxigento\Pv\Service\Sale\Request\AccountPv as PvSaleAccountPvRequest;
 
 include_once(__DIR__ . '/../phpunit_bootstrap.php');

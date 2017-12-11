@@ -14,14 +14,14 @@ use Praxigento\Wallet\Service\Operation\Request\AddToWalletActive as WalletOpera
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
 class Call
-    extends \Praxigento\Core\Service\Base\Call
+    extends \Praxigento\Core\App\Service\Base\Call
     implements \Praxigento\Bonus\GlobalSales\Lib\Service\ICalc
 {
     /** @var  \Praxigento\BonusBase\Service\IPeriod */
     protected $_callBasePeriod;
     /** @var  \Praxigento\Wallet\Service\IOperation */
     protected $_callWalletOperation;
-    /** @var  \Praxigento\Core\Transaction\Database\IManager */
+    /** @var  \Praxigento\Core\App\Transaction\Database\IManager */
     protected $_manTrans;
     /** @var  \Praxigento\BonusBase\Repo\Entity\Compress */
     protected $_repoBonusCompress;
@@ -40,9 +40,9 @@ class Call
 
     /**
      * Call constructor.
-     * @param \Praxigento\Core\Fw\Logger\App $logger
+     * @param \Praxigento\Core\App\Logger\App $logger
      * @param \Magento\Framework\ObjectManagerInterface $manObj
-     * @param \Praxigento\Core\Transaction\Database\IManager $manTrans
+     * @param \Praxigento\Core\App\Transaction\Database\IManager $manTrans
      * @param \Praxigento\Bonus\GlobalSales\Lib\Repo\IModule $repoMod
      * @param \Praxigento\BonusBase\Repo\Service\IModule $repoBonusService
      * @param \Praxigento\BonusBase\Repo\Entity\Compress $repoBonusCompress
@@ -55,9 +55,9 @@ class Call
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      */
     public function __construct(
-        \Praxigento\Core\Fw\Logger\App $logger,
+        \Praxigento\Core\App\Logger\App $logger,
         \Magento\Framework\ObjectManagerInterface $manObj,
-        \Praxigento\Core\Transaction\Database\IManager $manTrans,
+        \Praxigento\Core\App\Transaction\Database\IManager $manTrans,
         \Praxigento\Bonus\GlobalSales\Lib\Repo\IModule $repoMod,
         \Praxigento\BonusBase\Repo\Service\IModule $repoBonusService,
         \Praxigento\BonusBase\Repo\Entity\Compress $repoBonusCompress,

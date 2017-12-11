@@ -11,14 +11,14 @@ use Praxigento\Bonus\GlobalSales\Lib\Repo\decimal;
 use Praxigento\Bonus\GlobalSales\Lib\Repo\IModule;
 use Praxigento\BonusBase\Repo\Entity\Data\Compress;
 use Praxigento\BonusLoyalty\Repo\IModule as BonusLoyaltyRepo;
-use Praxigento\Core\Repo\Def\Db;
+use Praxigento\Core\App\Repo\Def\Db;
 use Praxigento\Pv\Repo\Entity\Data\Sale as PvSale;
 
 class Module extends Db implements IModule
 {
-    /** @var \Praxigento\Core\Transaction\Database\IManager */
+    /** @var \Praxigento\Core\App\Transaction\Database\IManager */
     protected $_manTrans;
-    /** @var \Praxigento\Core\Repo\IGeneric */
+    /** @var \Praxigento\Core\App\Repo\IGeneric */
     protected $_repoBasic;
     /** @var \Praxigento\BonusBase\Repo\Entity\Log\Rank */
     protected $_repoBonusLogRank;
@@ -29,8 +29,8 @@ class Module extends Db implements IModule
 
     public function __construct(
         \Magento\Framework\App\ResourceConnection $resource,
-        \Praxigento\Core\Transaction\Database\IManager $manTrans,
-        \Praxigento\Core\Repo\IGeneric $repoBasic,
+        \Praxigento\Core\App\Transaction\Database\IManager $manTrans,
+        \Praxigento\Core\App\Repo\IGeneric $repoBasic,
         BonusLoyaltyRepo $repoBonusLoyalty,
         \Praxigento\BonusBase\Repo\Entity\Log\Rank $repoBonusLogRank,
         \Praxigento\Core\Tool\IPeriod $toolPeriod

@@ -8,7 +8,7 @@ namespace Praxigento\BonusGlobalSales\Setup;
 use Praxigento\Bonus\GlobalSales\Lib\Entity\Cfg\Param;
 use Praxigento\Bonus\GlobalSales\Lib\Entity\Qualification;
 
-class InstallSchema extends \Praxigento\Core\Setup\Schema\Base
+class InstallSchema extends \Praxigento\Core\App\Setup\Schema\Base
 {
     protected function _setup()
     {

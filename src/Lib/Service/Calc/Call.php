@@ -40,7 +40,7 @@ class Call
 
     /**
      * Call constructor.
-     * @param \Praxigento\Core\App\Logger\App $logger
+     * @param \Psr\Log\LoggerInterface $logger
      * @param \Magento\Framework\ObjectManagerInterface $manObj
      * @param \Praxigento\Core\App\Transaction\Database\IManager $manTrans
      * @param \Praxigento\Bonus\GlobalSales\Lib\Repo\IModule $repoMod
@@ -55,7 +55,7 @@ class Call
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      */
     public function __construct(
-        \Praxigento\Core\App\Logger\App $logger,
+        \Psr\Log\LoggerInterface $logger,
         \Magento\Framework\ObjectManagerInterface $manObj,
         \Praxigento\Core\App\Transaction\Database\IManager $manTrans,
         \Praxigento\Bonus\GlobalSales\Lib\Repo\IModule $repoMod,

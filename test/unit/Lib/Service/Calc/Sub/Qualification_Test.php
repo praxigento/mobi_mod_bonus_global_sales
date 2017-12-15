@@ -27,7 +27,7 @@ class Qualification_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery {
         parent::setUp();
         $this->mCallDownlineMap = $this->_mock(\Praxigento\Downline\Service\IMap::class);
         $this->mCallDownlineSnap = $this->_mock(\Praxigento\Downline\Service\ISnap::class);
-        $this->mToolDownlineTree = $this->_mock(\Praxigento\Downline\Tool\ITree::class);
+        $this->mToolDownlineTree = $this->_mock(\Praxigento\Downline\Api\Helper\Downline::class);
         $this->sub = new Qualification(
             $this->mCallDownlineMap,
             $this->mCallDownlineSnap,

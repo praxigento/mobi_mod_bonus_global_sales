@@ -21,13 +21,13 @@ class Qualification {
     protected $_callDownlineMap;
     /** @var   \Praxigento\Downline\Service\ISnap */
     protected $_callDownlineSnap;
-    /** @var \Praxigento\Downline\Tool\ITree */
+    /** @var \Praxigento\Downline\Api\Helper\Downline */
     protected $_toolDownlineTree;
 
     public function __construct(
         \Praxigento\Downline\Service\IMap $callDownlineMap,
         \Praxigento\Downline\Service\ISnap $callDownlineSnap,
-        \Praxigento\Downline\Tool\ITree $toolDownlineTree
+        \Praxigento\Downline\Api\Helper\Downline $toolDownlineTree
     ) {
         $this->_callDownlineMap = $callDownlineMap;
         $this->_callDownlineSnap = $callDownlineSnap;

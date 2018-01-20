@@ -15,17 +15,17 @@ class InstallSchema extends \Praxigento\Core\App\Setup\Schema\Base
         /** Read and parse JSON schema. */
         $pathToFile = __DIR__ . '/../etc/dem.json';
         $pathToNode = '/dBEAR/package/Praxigento/package/Bonus/package/GlobalSales';
-        $demPackage = $this->_toolDem->readDemPackage($pathToFile, $pathToNode);
+        $demPackage = $this->toolDem->readDemPackage($pathToFile, $pathToNode);
 
         /* Cfg/ Param */
         $entityAlias = Param::ENTITY_NAME;
         $demEntity = $demPackage->get('package/Config/entity/Param');
-        $this->_toolDem->createEntity($entityAlias, $demEntity);
+        $this->toolDem->createEntity($entityAlias, $demEntity);
 
         /* Qualification */
         $entityAlias = Qualification::ENTITY_NAME;
         $demEntity = $demPackage->get('entity/Qualification');
-        $this->_toolDem->createEntity($entityAlias, $demEntity);
+        $this->toolDem->createEntity($entityAlias, $demEntity);
     }
 
 

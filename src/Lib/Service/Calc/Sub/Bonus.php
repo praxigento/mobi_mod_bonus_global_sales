@@ -13,14 +13,14 @@ class Bonus {
     const AS_IS_PRORATED = 'isProrated';
     const AS_MEMBERS = 'members';
     const AS_TOTAL_GV = 'totalGv';
-    /** @var  \Praxigento\Core\Tool\IFormat */
+    /** @var  \Praxigento\Core\Api\Helper\Format */
     protected $_toolFormat;
 
     /**
      * Bonus constructor.
      */
     public function __construct(
-        \Praxigento\Core\Tool\IFormat $toolFormat
+        \Praxigento\Core\Api\Helper\Format $toolFormat
 
     ) {
         $this->_toolFormat = $toolFormat;

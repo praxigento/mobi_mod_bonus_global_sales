@@ -24,7 +24,7 @@ class Module extends Db implements IModule
     protected $_repoBonusLogRank;
     /** @var BonusLoyaltyRepo */
     protected $_repoBonusLoyalty;
-    /** @var \Praxigento\Core\Tool\IPeriod */
+    /** @var \Praxigento\Core\Api\Helper\Period */
     protected $_toolPeriod;
 
     public function __construct(
@@ -33,7 +33,7 @@ class Module extends Db implements IModule
         \Praxigento\Core\App\Repo\IGeneric $repoBasic,
         BonusLoyaltyRepo $repoBonusLoyalty,
         \Praxigento\BonusBase\Repo\Entity\Log\Rank $repoBonusLogRank,
-        \Praxigento\Core\Tool\IPeriod $toolPeriod
+        \Praxigento\Core\Api\Helper\Period $toolPeriod
     ) {
         parent::__construct($resource);
         $this->_manTrans = $manTrans;

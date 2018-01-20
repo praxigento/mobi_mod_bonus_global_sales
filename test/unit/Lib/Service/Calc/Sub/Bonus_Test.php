@@ -19,7 +19,7 @@ class Bonus_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery {
 
     protected function setUp() {
         parent::setUp();
-        $this->mToolFormat = $this->_mock(\Praxigento\Core\Tool\IFormat::class);
+        $this->mToolFormat = $this->_mock(\Praxigento\Core\Api\Helper\Format::class);
         $this->sub = new Bonus(
             $this->mToolFormat
         );

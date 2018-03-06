@@ -12,11 +12,11 @@
   ],
   "autoload": {
     "files": [
-      "src/registration.php"
+      "registration.php"
     ],
     "psr-4": {
-      "Praxigento\\BonusGlobalSales\\": "src/",
-      "Praxigento\\Bonus\\GlobalSales\\": "src/"
+      "Praxigento\\BonusGlobalSales\\": "",
+      "Praxigento\\Bonus\\GlobalSales\\": ""
     }
   },
   "require": {

@@ -21,7 +21,7 @@ class Call
     protected $_callBasePeriod;
     /** @var  \Praxigento\Wallet\Service\IOperation */
     protected $_callWalletOperation;
-    /** @var  \Praxigento\Core\App\Transaction\Database\IManager */
+    /** @var  \Praxigento\Core\App\Api\Repo\Transaction\Manager */
     protected $_manTrans;
     /** @var  \Praxigento\BonusBase\Repo\Entity\Compress */
     protected $_repoBonusCompress;
@@ -42,7 +42,7 @@ class Call
      * Call constructor.
      * @param \Psr\Log\LoggerInterface $logger
      * @param \Magento\Framework\ObjectManagerInterface $manObj
-     * @param \Praxigento\Core\App\Transaction\Database\IManager $manTrans
+     * @param \Praxigento\Core\App\Api\Repo\Transaction\Manager $manTrans
      * @param \Praxigento\Bonus\GlobalSales\Lib\Repo\IModule $repoMod
      * @param \Praxigento\BonusBase\Repo\Service\IModule $repoBonusService
      * @param \Praxigento\BonusBase\Repo\Entity\Compress $repoBonusCompress
@@ -57,7 +57,7 @@ class Call
     public function __construct(
         \Psr\Log\LoggerInterface $logger,
         \Magento\Framework\ObjectManagerInterface $manObj,
-        \Praxigento\Core\App\Transaction\Database\IManager $manTrans,
+        \Praxigento\Core\App\Api\Repo\Transaction\Manager $manTrans,
         \Praxigento\Bonus\GlobalSales\Lib\Repo\IModule $repoMod,
         \Praxigento\BonusBase\Repo\Service\IModule $repoBonusService,
         \Praxigento\BonusBase\Repo\Entity\Compress $repoBonusCompress,

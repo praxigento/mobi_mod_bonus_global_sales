@@ -6,8 +6,8 @@
 namespace Praxigento\Bonus\GlobalSales\Lib\Service\Calc;
 
 
-use Praxigento\BonusBase\Repo\Entity\Data\Calculation;
-use Praxigento\BonusBase\Repo\Entity\Data\Period;
+use Praxigento\BonusBase\Repo\Data\Calculation;
+use Praxigento\BonusBase\Repo\Data\Period;
 
 include_once(__DIR__ . '/../../../phpunit_bootstrap.php');
 

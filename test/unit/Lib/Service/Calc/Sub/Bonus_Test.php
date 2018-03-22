@@ -7,7 +7,7 @@ namespace Praxigento\Bonus\GlobalSales\Lib\Service\Calc\Sub;
 
 use Praxigento\Bonus\GlobalSales\Lib\Entity\Cfg\Param;
 use Praxigento\Bonus\GlobalSales\Lib\Entity\Qualification;
-use Praxigento\BonusBase\Repo\Entity\Data\Compress;
+use Praxigento\BonusBase\Repo\Data\Compress;
 
 include_once(__DIR__ . '/../../../../phpunit_bootstrap.php');
 

@@ -9,7 +9,7 @@ use Praxigento\Bonus\GlobalSales\Lib\Entity\Cfg\Param;
 use Praxigento\Bonus\GlobalSales\Lib\Entity\Qualification;
 use Praxigento\Bonus\GlobalSales\Lib\Repo\decimal;
 use Praxigento\Bonus\GlobalSales\Lib\Repo\IModule;
-use Praxigento\BonusBase\Repo\Entity\Data\Compress;
+use Praxigento\BonusBase\Repo\Data\Compress;
 use Praxigento\BonusLoyalty\Repo\IModule as BonusLoyaltyRepo;
 use Praxigento\Core\App\Repo\Def\Db;
 use Praxigento\Pv\Repo\Entity\Data\Sale as PvSale;
@@ -20,7 +20,7 @@ class Module extends Db implements IModule
     protected $_manTrans;
     /** @var \Praxigento\Core\App\Repo\IGeneric */
     protected $_repoBasic;
-    /** @var \Praxigento\BonusBase\Repo\Entity\Log\Rank */
+    /** @var \Praxigento\BonusBase\Repo\Dao\Log\Rank */
     protected $_repoBonusLogRank;
     /** @var BonusLoyaltyRepo */
     protected $_repoBonusLoyalty;
@@ -32,7 +32,7 @@ class Module extends Db implements IModule
         \Praxigento\Core\Api\App\Repo\Transaction\Manager $manTrans,
         \Praxigento\Core\App\Repo\IGeneric $repoBasic,
         BonusLoyaltyRepo $repoBonusLoyalty,
-        \Praxigento\BonusBase\Repo\Entity\Log\Rank $repoBonusLogRank,
+        \Praxigento\BonusBase\Repo\Dao\Log\Rank $repoBonusLogRank,
         \Praxigento\Core\Api\Helper\Period $toolPeriod
     ) {
         parent::__construct($resource);
@@ -133,8 +133,8 @@ class Module extends Db implements IModule
     {
         foreach ($logs as $transRef => $rankRef) {
             $data = [
-                \Praxigento\BonusBase\Repo\Entity\Data\Log\Rank::ATTR_TRANS_REF => $transRef,
-                \Praxigento\BonusBase\Repo\Entity\Data\Log\Rank::ATTR_RANK_REF => $rankRef
+                \Praxigento\BonusBase\Repo\Data\Log\Rank::ATTR_TRANS_REF => $transRef,
+                \Praxigento\BonusBase\Repo\Data\Log\Rank::ATTR_RANK_REF => $rankRef
             ];
             $this->_repoBonusLogRank->create($data);
         }

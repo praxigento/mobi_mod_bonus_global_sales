@@ -12,7 +12,7 @@ use Praxigento\Bonus\GlobalSales\Lib\Repo\IModule;
 use Praxigento\BonusBase\Repo\Data\Compress;
 use Praxigento\BonusLoyalty\Repo\IModule as BonusLoyaltyRepo;
 use Praxigento\Core\App\Repo\Def\Db;
-use Praxigento\Pv\Repo\Entity\Data\Sale as PvSale;
+use Praxigento\Pv\Repo\Data\Sale as PvSale;
 
 class Module extends Db implements IModule
 {

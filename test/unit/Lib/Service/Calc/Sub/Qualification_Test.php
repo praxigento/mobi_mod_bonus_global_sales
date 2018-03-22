@@ -8,7 +8,7 @@ namespace Praxigento\Bonus\GlobalSales\Lib\Service\Calc\Sub;
 use Flancer32\Lib\DataObject;
 use Praxigento\Bonus\GlobalSales\Lib\Entity\Cfg\Param;
 use Praxigento\BonusBase\Repo\Data\Compress;
-use Praxigento\Downline\Repo\Entity\Data\Snap;
+use Praxigento\Downline\Repo\Data\Snap;
 
 
 include_once(__DIR__ . '/../../../../phpunit_bootstrap.php');

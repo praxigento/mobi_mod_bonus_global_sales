@@ -6,7 +6,7 @@
  */
 namespace Praxigento\BonusGlobalSales\Setup;
 
-use Praxigento\Accounting\Repo\Entity\Data\Type\Operation as TypeOperation;
+use Praxigento\Accounting\Repo\Data\Type\Operation as TypeOperation;
 use Praxigento\BonusBase\Repo\Entity\Data\Type\Calc as TypeCalc;
 use Praxigento\BonusGlobalSales\Config as Cfg;
 

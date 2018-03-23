@@ -65,16 +65,16 @@ class Module extends Db implements IModule
         $tblCompress = $this->resource->getTableName(Compress::ENTITY_NAME);
         // SELECT FROM prxgt_bon_globsal_qual pbgq
         $query = $this->conn->select();
-        $query->from([$asQual => $tblQual], [Qualification::ATTR_GV, Qualification::ATTR_RANK_ID]);
+        $query->from([$asQual => $tblQual], [Qualification::A_GV, Qualification::A_RANK_ID]);
         // LEFT JOIN prxgt_bon_base_compress pbbc ON pbbc.id = pbgq.compress_id
-        $on = "$asCompress." . Compress::ATTR_ID . "=$asQual." . Qualification::ATTR_COMPRESS_ID;
+        $on = "$asCompress." . Compress::A_ID . "=$asQual." . Qualification::A_COMPRESS_ID;
         $cols = [
-            Compress::ATTR_CUSTOMER_ID,
-            Compress::ATTR_PARENT_ID
+            Compress::A_CUSTOMER_ID,
+            Compress::A_PARENT_ID
         ];
         $query->joinLeft([$asCompress => $tblCompress], $on, $cols);
         // where
-        $where = $asCompress . '.' . Compress::ATTR_CALC_ID . '=' . (int)$calcId;
+        $where = $asCompress . '.' . Compress::A_CALC_ID . '=' . (int)$calcId;
         $query->where($where);
         // $sql = (string)$query;
         $result = $this->conn->fetchAll($query);
@@ -84,10 +84,10 @@ class Module extends Db implements IModule
     public function getConfigParams()
     {
         $result = [];
-        $order = Param::ATTR_GV . ' ASC';
+        $order = Param::A_GV . ' ASC';
         $data = $this->_repoBasic->getEntities(Param::ENTITY_NAME, null, null, $order);
         foreach ($data as $item) {
-            $rankId = $item[Param::ATTR_RANK_ID];
+            $rankId = $item[Param::A_RANK_ID];
             $result[$rankId] = $item;
         }
         return $result;
@@ -119,10 +119,10 @@ class Module extends Db implements IModule
         $tblPv = $this->resource->getTableName(PvSale::ENTITY_NAME);
         // SELECT FROM prxgt_pv_sale pps
         $query = $this->conn->select();
-        $query->from([$asPv => $tblPv], [$asSummary => 'SUM(' . PvSale::ATTR_TOTAL . ')']);
+        $query->from([$asPv => $tblPv], [$asSummary => 'SUM(' . PvSale::A_TOTAL . ')']);
         // where
-        $whereFrom = $asPv . '.' . PvSale::ATTR_DATE_PAID . '>=' . $this->conn->quote($tsFrom);
-        $whereTo = $asPv . '.' . PvSale::ATTR_DATE_PAID . '<=' . $this->conn->quote($tsTo);
+        $whereFrom = $asPv . '.' . PvSale::A_DATE_PAID . '>=' . $this->conn->quote($tsFrom);
+        $whereTo = $asPv . '.' . PvSale::A_DATE_PAID . '<=' . $this->conn->quote($tsTo);
         $query->where("$whereFrom AND $whereTo");
         // $sql = (string)$query;
         $result = $this->conn->fetchOne($query);
@@ -133,8 +133,8 @@ class Module extends Db implements IModule
     {
         foreach ($logs as $transRef => $rankRef) {
             $data = [
-                \Praxigento\BonusBase\Repo\Data\Log\Rank::ATTR_TRANS_REF => $transRef,
-                \Praxigento\BonusBase\Repo\Data\Log\Rank::ATTR_RANK_REF => $rankRef
+                \Praxigento\BonusBase\Repo\Data\Log\Rank::A_TRANS_REF => $transRef,
+                \Praxigento\BonusBase\Repo\Data\Log\Rank::A_RANK_REF => $rankRef
             ];
             $this->_repoBonusLogRank->create($data);
         }

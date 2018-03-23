@@ -36,8 +36,8 @@ class Qualification {
 
     private function _expandTree($data) {
         $req = new DownlineSnapExtendMinimalRequest();
-        $req->setKeyCustomerId(Compress::ATTR_CUSTOMER_ID);
-        $req->setKeyParentId(Compress::ATTR_PARENT_ID);
+        $req->setKeyCustomerId(Compress::A_CUSTOMER_ID);
+        $req->setKeyParentId(Compress::A_PARENT_ID);
         $req->setTree($data);
         $resp = $this->_callDownlineSnap->expandMinimal($req);
         return $resp->getSnapData();
@@ -46,7 +46,7 @@ class Qualification {
     private function _mapById($tree) {
         $req = new DownlineMapByIdRequest();
         $req->setDataToMap($tree);
-        $req->setAsId(Compress::ATTR_CUSTOMER_ID);
+        $req->setAsId(Compress::A_CUSTOMER_ID);
         $resp = $this->_callDownlineMap->byId($req);
         return $resp->getMapped();
     }
@@ -54,8 +54,8 @@ class Qualification {
     private function _mapByTreeDepthDesc($tree) {
         $req = new DownlineMapTreeByDepthRequest();
         $req->setDataToMap($tree);
-        $req->setAsCustomerId(Compress::ATTR_CUSTOMER_ID);
-        $req->setAsDepth(Snap::ATTR_DEPTH);
+        $req->setAsCustomerId(Compress::A_CUSTOMER_ID);
+        $req->setAsDepth(Snap::A_DEPTH);
         $req->setShouldReversed(true);
         $resp = $this->_callDownlineMap->treeByDepth($req);
         return $resp->getMapped();
@@ -74,7 +74,7 @@ class Qualification {
                     $gvTree[$custId] = [ ];
                 }
                 $pv = $qData[$custId];
-                $path = $treeExpanded[$custId][Snap::ATTR_PATH];
+                $path = $treeExpanded[$custId][Snap::A_PATH];
                 $parents = $this->_toolDownlineTree->getParentsFromPathReversed($path);
                 $lvl = 1;
                 $legId = $custId;
@@ -110,8 +110,8 @@ class Qualification {
             $rankIdQualified = null;
             $gvQualified = 0;
             foreach($cfgParams as $rankId => $params) {
-                $maxPercent = $params[Param::ATTR_LEG_MAX_PERCENT];
-                $gvRequired = $params[Param::ATTR_GV];
+                $maxPercent = $params[Param::A_LEG_MAX_PERCENT];
+                $gvRequired = $params[Param::A_GV];
                 $gvMax = $gvRequired * $maxPercent;
                 $gvTotal = 0;
                 foreach($legs as $gvLeg) {
@@ -127,11 +127,11 @@ class Qualification {
             }
             /* add values to results */
             if(!is_null($rankIdQualified)) {
-                $compressId = $mapById[$custId][Compress::ATTR_ID];
+                $compressId = $mapById[$custId][Compress::A_ID];
                 $result[$custId] = [
-                    EntityQual::ATTR_COMPRESS_ID => $compressId,
-                    EntityQual::ATTR_RANK_ID     => $rankIdQualified,
-                    EntityQual::ATTR_GV          => $gvQualified
+                    EntityQual::A_COMPRESS_ID => $compressId,
+                    EntityQual::A_RANK_ID     => $rankIdQualified,
+                    EntityQual::A_GV          => $gvQualified
                 ];
             }
         }

@@ -54,15 +54,15 @@ class Qualification_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery {
         $TREE = [ ];
         $Q_DATA = [ $CUST_1 => 400, $CUST_2 => 300, $CUST_3 => 200, $CUST_4 => 100, $CUST_5 => 50 ];
         $CFG_PARAMS = [
-            $RANK_1 = [ Param::ATTR_LEG_MAX_PERCENT => 0.80, Param::ATTR_GV => 1 ]
+            $RANK_1 = [ Param::A_LEG_MAX_PERCENT => 0.80, Param::A_GV => 1 ]
         ];
         $GV_MAX_LEVELS = 2;
         $TREE_EXP = [
-            $CUST_1 => [ Snap::ATTR_PATH => '/' ],
-            $CUST_2 => [ Snap::ATTR_PATH => '/1/' ],
-            $CUST_3 => [ Snap::ATTR_PATH => '/1/' ],
-            $CUST_4 => [ Snap::ATTR_PATH => '/1/2/' ],
-            $CUST_5 => [ Snap::ATTR_PATH => '/1/2/4/' ]
+            $CUST_1 => [ Snap::A_PATH => '/' ],
+            $CUST_2 => [ Snap::A_PATH => '/1/' ],
+            $CUST_3 => [ Snap::A_PATH => '/1/' ],
+            $CUST_4 => [ Snap::A_PATH => '/1/2/' ],
+            $CUST_5 => [ Snap::A_PATH => '/1/2/4/' ]
         ];
         $TREE_DEPTH = [
             3 => [ $CUST_5 ],
@@ -71,7 +71,7 @@ class Qualification_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery {
             0 => [ $CUST_1 ]
         ];
         $TREE_ID = [
-            $CUST_1 => [ Compress::ATTR_ID => 'id' ]
+            $CUST_1 => [ Compress::A_ID => 'id' ]
         ];
         /** === Setup Mocks === */
         // $treeExpanded = $this->_expandTree($tree);

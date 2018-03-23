@@ -33,29 +33,29 @@ class Bonus_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery {
         $CUST_2 = 20;
         $TREE = [
             [
-                Compress::ATTR_CUSTOMER_ID  => $CUST_1,
-                Qualification::ATTR_GV      => 100,
-                Qualification::ATTR_RANK_ID => $RANK_1
+                Compress::A_CUSTOMER_ID  => $CUST_1,
+                Qualification::A_GV      => 100,
+                Qualification::A_RANK_ID => $RANK_1
             ],
             [
-                Compress::ATTR_CUSTOMER_ID  => $CUST_2,
-                Qualification::ATTR_GV      => 200,
-                Qualification::ATTR_RANK_ID => $RANK_2
+                Compress::A_CUSTOMER_ID  => $CUST_2,
+                Qualification::A_GV      => 200,
+                Qualification::A_RANK_ID => $RANK_2
             ]
         ];
         $PV_TOTAL = 2100;
         $PARAMS = [
             $RANK_1 => [
-                Param::ATTR_RANK_ID     => $RANK_1,
-                Param::ATTR_GV          => 100,
-                Param::ATTR_PERCENT     => 0.01,
-                Param::ATTR_IS_PRORATED => true
+                Param::A_RANK_ID     => $RANK_1,
+                Param::A_GV          => 100,
+                Param::A_PERCENT     => 0.01,
+                Param::A_IS_PRORATED => true
             ],
             $RANK_2 => [
-                Param::ATTR_RANK_ID     => $RANK_2,
-                Param::ATTR_GV          => 200,
-                Param::ATTR_PERCENT     => 0.02,
-                Param::ATTR_IS_PRORATED => false
+                Param::A_RANK_ID     => $RANK_2,
+                Param::A_GV          => 200,
+                Param::A_PERCENT     => 0.02,
+                Param::A_IS_PRORATED => false
             ]
         ];
 

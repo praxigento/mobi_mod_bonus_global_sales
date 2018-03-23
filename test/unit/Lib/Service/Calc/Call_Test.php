@@ -105,7 +105,7 @@ class Call_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
         $DS_END = 'end';
         $CALC_TYPE_ID_COMPRESS = 4;
         $CALC_ID_COMPRESS = 8;
-        $CALC_DATA_COMPRESS = [Calculation::ATTR_ID => $CALC_ID_COMPRESS];
+        $CALC_DATA_COMPRESS = [Calculation::A_ID => $CALC_ID_COMPRESS];
         $CONFI_PARAMS = [];
         $TREE_COMPRESS = [];
         $PV_TOTAL = 'total';
@@ -123,12 +123,12 @@ class Call_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
         // $this->_getConn()->beginTransaction();
         $this->mConn
             ->shouldReceive('beginTransaction')->once();
-        // $dsBegin = $periodDataDepend[Period::ATTR_DSTAMP_BEGIN];
-        // $dsEnd = $periodDataDepend[Period::ATTR_DSTAMP_END];
+        // $dsBegin = $periodDataDepend[Period::A_DSTAMP_BEGIN];
+        // $dsEnd = $periodDataDepend[Period::A_DSTAMP_END];
         $mRespGetPeriod->setDependentPeriodData([
-            Period::ATTR_ID => 'id',
-            Period::ATTR_DSTAMP_BEGIN => $DS_BEGIN,
-            Period::ATTR_DSTAMP_END => $DS_END
+            Period::A_ID => 'id',
+            Period::A_DSTAMP_BEGIN => $DS_BEGIN,
+            Period::A_DSTAMP_END => $DS_END
         ]);
         // $calcTypeIdCompress = $this->_repoMod->getTypeCalcIdByCode(Cfg::CODE_TYPE_CALC_COMPRESSION);
         $this->mRepoMod

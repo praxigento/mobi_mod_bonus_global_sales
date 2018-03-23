@@ -30,9 +30,9 @@ class Bonus {
     {
         $result = [];
         foreach ($params as $param) {
-            $rankId = $param[Param::ATTR_RANK_ID];
-            $percent = $param[Param::ATTR_PERCENT];
-            $isProrated = $param[Param::ATTR_IS_PRORATED];
+            $rankId = $param[Param::A_RANK_ID];
+            $percent = $param[Param::A_PERCENT];
+            $isProrated = $param[Param::A_IS_PRORATED];
             $bonus = $this->_toolFormat->roundBonus($pvTotal * $percent);
             $result[$rankId][self::AS_AMOUNT_TOTAL] = $bonus;
             $result[$rankId][self::AS_IS_PRORATED] = (bool)$isProrated;
@@ -44,8 +44,8 @@ class Bonus {
         $result = [ ];
         $prevRank = null;
         foreach($params as $param) {
-            $rank = $param[Param::ATTR_RANK_ID];
-            $gv = $param[Param::ATTR_GV];
+            $rank = $param[Param::A_RANK_ID];
+            $gv = $param[Param::A_GV];
             if(!is_null($prevRank)) {
                 $result[$prevRank] = $gv;
             }
@@ -63,9 +63,9 @@ class Bonus {
         /** @var array $mapRanks [$rankId=>[members=>[$custId=>GV, ...], totalGv=>$gv], ...] */
         $mapRanks = [ ];
         foreach($tree as $customer) {
-            $custId = $customer[Compress::ATTR_CUSTOMER_ID];
-            $gvQual = $customer[\Praxigento\Bonus\GlobalSales\Lib\Entity\Qualification::ATTR_GV];
-            $rankQual = $customer[\Praxigento\Bonus\GlobalSales\Lib\Entity\Qualification::ATTR_RANK_ID];
+            $custId = $customer[Compress::A_CUSTOMER_ID];
+            $gvQual = $customer[\Praxigento\Bonus\GlobalSales\Lib\Entity\Qualification::A_GV];
+            $rankQual = $customer[\Praxigento\Bonus\GlobalSales\Lib\Entity\Qualification::A_RANK_ID];
             foreach($params as $rankId => $param) {
                 $gvMax = $mapMaxGvPerRank[$rankId];
                 $gv = ($gvQual > $gvMax) ? $gvMax : $gvQual;

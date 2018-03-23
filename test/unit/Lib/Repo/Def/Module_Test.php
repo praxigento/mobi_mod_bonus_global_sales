@@ -73,7 +73,7 @@ class Module_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
         /** === Test Data === */
         $RANK_ID = 2;
         $DATA = [
-            [Param::ATTR_RANK_ID => $RANK_ID]
+            [Param::A_RANK_ID => $RANK_ID]
         ];
 
         /** === Setup Mocks === */
@@ -84,7 +84,7 @@ class Module_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
 
         /** === Call and asserts  === */
         $resp = $this->repo->getConfigParams();
-        $this->assertEquals($RANK_ID, $resp[$RANK_ID][Param::ATTR_RANK_ID]);
+        $this->assertEquals($RANK_ID, $resp[$RANK_ID][Param::A_RANK_ID]);
     }
 
     public function test_getQualificationData()

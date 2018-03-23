@@ -17,8 +17,8 @@ class InstallData extends \Praxigento\Core\App\Setup\Data\Base
         $this->_repoGeneric->addEntity(
             TypeOperation::ENTITY_NAME,
             [
-                TypeOperation::ATTR_CODE => Cfg::CODE_TYPE_OPER_BONUS,
-                TypeOperation::ATTR_NOTE => 'Global Sales bonus.'
+                TypeOperation::A_CODE => Cfg::CODE_TYPE_OPER_BONUS,
+                TypeOperation::A_NOTE => 'Global Sales bonus.'
             ]
         );
     }
@@ -27,7 +27,7 @@ class InstallData extends \Praxigento\Core\App\Setup\Data\Base
     {
         $this->_conn->insertArray(
             $this->_resource->getTableName(TypeCalc::ENTITY_NAME),
-            [TypeCalc::ATTR_CODE, TypeCalc::ATTR_NOTE],
+            [TypeCalc::A_CODE, TypeCalc::A_NOTE],
             [
                 [Cfg::CODE_TYPE_CALC_QUALIFICATION, 'Qualification for Global Sales bonus.'],
                 [Cfg::CODE_TYPE_CALC_BONUS, 'Global Sales bonus itself.']

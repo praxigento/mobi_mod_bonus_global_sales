@@ -30,16 +30,16 @@ class Module extends Db implements IModule
     public function __construct(
         \Magento\Framework\App\ResourceConnection $resource,
         \Praxigento\Core\Api\App\Repo\Transaction\Manager $manTrans,
-        \Praxigento\Core\App\Repo\IGeneric $repoBasic,
-        BonusLoyaltyRepo $repoBonusLoyalty,
-        \Praxigento\BonusBase\Repo\Dao\Log\Rank $repoBonusLogRank,
+        \Praxigento\Core\App\Repo\IGeneric $daoBasic,
+        BonusLoyaltyRepo $daoBonusLoyalty,
+        \Praxigento\BonusBase\Repo\Dao\Log\Rank $daoBonusLogRank,
         \Praxigento\Core\Api\Helper\Period $toolPeriod
     ) {
         parent::__construct($resource);
         $this->_manTrans = $manTrans;
-        $this->_repoBasic = $repoBasic;
-        $this->_repoBonusLoyalty = $repoBonusLoyalty;
-        $this->_repoBonusLogRank = $repoBonusLogRank;
+        $this->_repoBasic = $daoBasic;
+        $this->_repoBonusLoyalty = $daoBonusLoyalty;
+        $this->_repoBonusLogRank = $daoBonusLogRank;
         $this->_toolPeriod = $toolPeriod;
     }
 

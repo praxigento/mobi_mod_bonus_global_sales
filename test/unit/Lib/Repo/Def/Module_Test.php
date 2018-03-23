@@ -22,7 +22,7 @@ class Module_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
     /** @var  \Mockery\MockInterface */
     private $mToolPeriod;
     /** @var  Module */
-    private $repo;
+    private $dao;
 
     protected function setUp()
     {
@@ -33,7 +33,7 @@ class Module_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
         $this->mRepoGeneric = $this->_mockRepoGeneric($this->mDba);
         $this->mRepoBonusLoyalty = $this->_mock(\Praxigento\BonusLoyalty\Repo\IModule::class);
         $this->mToolPeriod = $this->_mock(\Praxigento\Core\Api\Helper\Period::class);
-        $this->repo = new Module(
+        $this->dao = new Module(
             $this->mRepoGeneric,
             $this->mRepoBonusLoyalty,
             $this->mToolPeriod
@@ -64,7 +64,7 @@ class Module_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
             ->andReturn($RESULT);
 
         /** === Call and asserts  === */
-        $resp = $this->repo->getCompressedTreeWithQualifications($CALC_ID);
+        $resp = $this->dao->getCompressedTreeWithQualifications($CALC_ID);
         $this->assertEquals($RESULT, $resp);
     }
 
@@ -83,7 +83,7 @@ class Module_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
             ->andReturn($DATA);
 
         /** === Call and asserts  === */
-        $resp = $this->repo->getConfigParams();
+        $resp = $this->dao->getConfigParams();
         $this->assertEquals($RANK_ID, $resp[$RANK_ID][Param::A_RANK_ID]);
     }
 
@@ -102,7 +102,7 @@ class Module_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
             ->andReturn($RESULT);
 
         /** === Call and asserts  === */
-        $resp = $this->repo->getQualificationData($DS_BEGIN, $DS_END);
+        $resp = $this->dao->getQualificationData($DS_BEGIN, $DS_END);
         $this->assertEquals($RESULT, $resp);
     }
 
@@ -145,7 +145,7 @@ class Module_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
             ->andReturn($RESULT);
 
         /** === Call and asserts  === */
-        $resp = $this->repo->getSalesOrdersPvForPeriod($DS_BEGIN, $DS_END);
+        $resp = $this->dao->getSalesOrdersPvForPeriod($DS_BEGIN, $DS_END);
         $this->assertEquals($RESULT, $resp);
     }
 
@@ -163,7 +163,7 @@ class Module_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
             ->with(2, 22);
 
         /** === Call and asserts  === */
-        $this->repo->saveLogRanks($LOGS);
+        $this->dao->saveLogRanks($LOGS);
     }
 
     public function test_saveQualificationParams_commit()
@@ -178,7 +178,7 @@ class Module_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
         $this->mConn->shouldReceive('commit')->once();
 
         /** === Call and asserts  === */
-        $this->repo->saveQualificationParams($UPDATES);
+        $this->dao->saveQualificationParams($UPDATES);
     }
 
     /**
@@ -196,7 +196,7 @@ class Module_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
         $this->mConn->shouldReceive('rollBack')->once();
 
         /** === Call and asserts  === */
-        $this->repo->saveQualificationParams($UPDATES);
+        $this->dao->saveQualificationParams($UPDATES);
     }
 
 

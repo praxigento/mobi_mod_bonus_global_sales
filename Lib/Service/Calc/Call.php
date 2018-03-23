@@ -43,10 +43,10 @@ class Call
      * @param \Praxigento\Core\Api\App\Logger\Main $logger
      * @param \Magento\Framework\ObjectManagerInterface $manObj
      * @param \Praxigento\Core\Api\App\Repo\Transaction\Manager $manTrans
-     * @param \Praxigento\Bonus\GlobalSales\Lib\Repo\IModule $repoMod
-     * @param \Praxigento\BonusBase\Repo\Service\IModule $repoBonusService
-     * @param \Praxigento\BonusBase\Repo\Dao\Compress $repoBonusCompress
-     * @param \Praxigento\BonusBase\Repo\Dao\Type\Calc $repoBonusTypeCalc
+     * @param \Praxigento\Bonus\GlobalSales\Lib\Repo\IModule $daoMod
+     * @param \Praxigento\BonusBase\Repo\Service\IModule $daoBonusService
+     * @param \Praxigento\BonusBase\Repo\Dao\Compress $daoBonusCompress
+     * @param \Praxigento\BonusBase\Repo\Dao\Type\Calc $daoBonusTypeCalc
      * @param \Praxigento\BonusBase\Service\IPeriod $callBasePeriod
      * @param \Praxigento\Wallet\Service\IOperation $callWalletOperation
      * @param Sub\Bonus $subBonus
@@ -58,10 +58,10 @@ class Call
         \Praxigento\Core\Api\App\Logger\Main $logger,
         \Magento\Framework\ObjectManagerInterface $manObj,
         \Praxigento\Core\Api\App\Repo\Transaction\Manager $manTrans,
-        \Praxigento\Bonus\GlobalSales\Lib\Repo\IModule $repoMod,
-        \Praxigento\BonusBase\Repo\Service\IModule $repoBonusService,
-        \Praxigento\BonusBase\Repo\Dao\Compress $repoBonusCompress,
-        \Praxigento\BonusBase\Repo\Dao\Type\Calc $repoBonusTypeCalc,
+        \Praxigento\Bonus\GlobalSales\Lib\Repo\IModule $daoMod,
+        \Praxigento\BonusBase\Repo\Service\IModule $daoBonusService,
+        \Praxigento\BonusBase\Repo\Dao\Compress $daoBonusCompress,
+        \Praxigento\BonusBase\Repo\Dao\Type\Calc $daoBonusTypeCalc,
         \Praxigento\BonusBase\Service\IPeriod $callBasePeriod,
         \Praxigento\Wallet\Service\IOperation $callWalletOperation,
         Sub\Bonus $subBonus,
@@ -69,10 +69,10 @@ class Call
     ) {
         parent::__construct($logger, $manObj);
         $this->_manTrans = $manTrans;
-        $this->_repoMod = $repoMod;
-        $this->_repoBonusService = $repoBonusService;
-        $this->_repoBonusCompress = $repoBonusCompress;
-        $this->_repoBonusTypeCalc = $repoBonusTypeCalc;
+        $this->_repoMod = $daoMod;
+        $this->_repoBonusService = $daoBonusService;
+        $this->_repoBonusCompress = $daoBonusCompress;
+        $this->_repoBonusTypeCalc = $daoBonusTypeCalc;
         $this->_callBasePeriod = $callBasePeriod;
         $this->_callWalletOperation = $callWalletOperation;
         $this->_subBonus = $subBonus;

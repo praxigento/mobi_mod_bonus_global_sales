@@ -1,8 +1,8 @@
 {
-  "name": "praxigento/mobi_mod_mage2_bonus_global_sales",
+  "name": "praxigento/mobi_mod_bonus_global_sales",
   "description": "MOBI: Praxigento_BonusGlobalSales module.",
   "type": "magento2-module",
-  "homepage": "https://github.com/praxigento/mobi_mod_mage2_bonus_global_sales",
+  "homepage": "https://github.com/praxigento/mobi_mod_bonus_global_sales",
   "license": "MIT",
   "authors": [
     {
@@ -20,6 +20,6 @@
     }
   },
   "require": {
-    "praxigento/mobi_mod_mage2_bonus_loyalty": "dev-master"
+    "praxigento/mobi_mod_bonus_loyalty": "dev-master"
   }
 }

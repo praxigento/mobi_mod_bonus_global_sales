@@ -11,14 +11,14 @@ use Praxigento\Bonus\GlobalSales\Lib\Repo\decimal;
 use Praxigento\Bonus\GlobalSales\Lib\Repo\IModule;
 use Praxigento\BonusBase\Repo\Data\Compress;
 use Praxigento\BonusLoyalty\Repo\IModule as BonusLoyaltyRepo;
-use Praxigento\Core\App\Repo\Def\Db;
+use Praxigento\Core\App\Repo\Db;
 use Praxigento\Pv\Repo\Data\Sale as PvSale;
 
 class Module extends Db implements IModule
 {
     /** @var \Praxigento\Core\Api\App\Repo\Transaction\Manager */
     protected $_manTrans;
-    /** @var \Praxigento\Core\App\Repo\IGeneric */
+    /** @var \Praxigento\Core\Api\App\Repo\Generic */
     protected $_repoBasic;
     /** @var \Praxigento\BonusBase\Repo\Dao\Log\Rank */
     protected $_repoBonusLogRank;
@@ -30,7 +30,7 @@ class Module extends Db implements IModule
     public function __construct(
         \Magento\Framework\App\ResourceConnection $resource,
         \Praxigento\Core\Api\App\Repo\Transaction\Manager $manTrans,
-        \Praxigento\Core\App\Repo\IGeneric $daoBasic,
+        \Praxigento\Core\Api\App\Repo\Generic $daoBasic,
         BonusLoyaltyRepo $daoBonusLoyalty,
         \Praxigento\BonusBase\Repo\Dao\Log\Rank $daoBonusLogRank,
         \Praxigento\Core\Api\Helper\Period $toolPeriod

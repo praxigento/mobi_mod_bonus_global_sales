@@ -14,49 +14,31 @@ use Praxigento\Wallet\Service\Operation\Request\AddToWalletActive as WalletOpera
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
 class Call
-    extends \Praxigento\Core\App\Service\Base\Call
     implements \Praxigento\Bonus\GlobalSales\Lib\Service\ICalc
 {
     /** @var  \Praxigento\BonusBase\Service\IPeriod */
-    protected $_callBasePeriod;
+    private $callBasePeriod;
     /** @var  \Praxigento\Wallet\Service\IOperation */
-    protected $_callWalletOperation;
-    /** @var  \Praxigento\Core\Api\App\Repo\Transaction\Manager */
-    protected $_manTrans;
-    /** @var  \Praxigento\BonusBase\Repo\Dao\Compress */
-    protected $_repoBonusCompress;
-    /** @var \Praxigento\BonusBase\Repo\Service\IModule */
-    protected $_repoBonusService;
-    /** @var \Praxigento\BonusBase\Repo\Dao\Type\Calc */
-    protected $_repoBonusTypeCalc;
-    /** @var \Praxigento\Bonus\GlobalSales\Lib\Repo\IModule */
-    protected $_repoMod;
-    /** @var  Sub\Bonus */
-    protected $_subBonus;
-    /** @var Sub\Qualification */
-    protected $_subQualification;
+    private $callWalletOperation;
     /** @var \Psr\Log\LoggerInterface */
-    protected $logger;
+    private $logger;
+    /** @var  \Praxigento\Core\Api\App\Repo\Transaction\Manager */
+    private $manTrans;
+    /** @var  \Praxigento\BonusBase\Repo\Dao\Compress */
+    private $repoBonusCompress;
+    /** @var \Praxigento\BonusBase\Repo\Service\IModule */
+    private $repoBonusService;
+    /** @var \Praxigento\BonusBase\Repo\Dao\Type\Calc */
+    private $repoBonusTypeCalc;
+    /** @var \Praxigento\Bonus\GlobalSales\Lib\Repo\IModule */
+    private $repoMod;
+    /** @var  Sub\Bonus */
+    private $subBonus;
+    /** @var Sub\Qualification */
+    private $subQualification;
 
-    /**
-     * Call constructor.
-     * @param \Praxigento\Core\Api\App\Logger\Main $logger
-     * @param \Magento\Framework\ObjectManagerInterface $manObj
-     * @param \Praxigento\Core\Api\App\Repo\Transaction\Manager $manTrans
-     * @param \Praxigento\Bonus\GlobalSales\Lib\Repo\IModule $daoMod
-     * @param \Praxigento\BonusBase\Repo\Service\IModule $daoBonusService
-     * @param \Praxigento\BonusBase\Repo\Dao\Compress $daoBonusCompress
-     * @param \Praxigento\BonusBase\Repo\Dao\Type\Calc $daoBonusTypeCalc
-     * @param \Praxigento\BonusBase\Service\IPeriod $callBasePeriod
-     * @param \Praxigento\Wallet\Service\IOperation $callWalletOperation
-     * @param Sub\Bonus $subBonus
-     * @param Sub\Qualification $subQual
-     *
-     * @SuppressWarnings(PHPMD.ExcessiveParameterList)
-     */
     public function __construct(
         \Praxigento\Core\Api\App\Logger\Main $logger,
-        \Magento\Framework\ObjectManagerInterface $manObj,
         \Praxigento\Core\Api\App\Repo\Transaction\Manager $manTrans,
         \Praxigento\Bonus\GlobalSales\Lib\Repo\IModule $daoMod,
         \Praxigento\BonusBase\Repo\Service\IModule $daoBonusService,
@@ -67,16 +49,16 @@ class Call
         Sub\Bonus $subBonus,
         Sub\Qualification $subQual
     ) {
-        parent::__construct($logger, $manObj);
-        $this->_manTrans = $manTrans;
-        $this->_repoMod = $daoMod;
-        $this->_repoBonusService = $daoBonusService;
-        $this->_repoBonusCompress = $daoBonusCompress;
-        $this->_repoBonusTypeCalc = $daoBonusTypeCalc;
-        $this->_callBasePeriod = $callBasePeriod;
-        $this->_callWalletOperation = $callWalletOperation;
-        $this->_subBonus = $subBonus;
-        $this->_subQualification = $subQual;
+        $this->logger = $logger;
+        $this->manTrans = $manTrans;
+        $this->repoMod = $daoMod;
+        $this->repoBonusService = $daoBonusService;
+        $this->repoBonusCompress = $daoBonusCompress;
+        $this->repoBonusTypeCalc = $daoBonusTypeCalc;
+        $this->callBasePeriod = $callBasePeriod;
+        $this->callWalletOperation = $callWalletOperation;
+        $this->subBonus = $subBonus;
+        $this->subQualification = $subQual;
     }
 
     /**
@@ -102,7 +84,7 @@ class Call
         $req->setAsRef($asRef);
         $req->setOperationTypeCode(Cfg::CODE_TYPE_OPER_BONUS);
         $req->setTransData($transData);
-        $result = $this->_callWalletOperation->addToWalletActive($req);
+        $result = $this->callWalletOperation->addToWalletActive($req);
         return $result;
     }
 
@@ -122,9 +104,9 @@ class Call
         $calcType = Cfg::CODE_TYPE_CALC_BONUS;
         $reqGetPeriod->setBaseCalcTypeCode($calcTypeBase);
         $reqGetPeriod->setDependentCalcTypeCode($calcType);
-        $respGetPeriod = $this->_callBasePeriod->getForDependentCalc($reqGetPeriod);
+        $respGetPeriod = $this->callBasePeriod->getForDependentCalc($reqGetPeriod);
         if ($respGetPeriod->isSucceed()) {
-            $def = $this->_manTrans->begin();
+            $def = $this->manTrans->begin();
             try {
                 $periodDataDepend = $respGetPeriod->getDependentPeriodData();
                 $calcDataDepend = $respGetPeriod->getDependentCalcData();
@@ -132,27 +114,27 @@ class Call
                 $dsBegin = $periodDataDepend->getDstampBegin();
                 $dsEnd = $periodDataDepend->getDstampEnd();
                 /* collect data to process bonus */
-                $calcTypeIdCompress = $this->_repoBonusTypeCalc->getIdByCode(Cfg::CODE_TYPE_CALC_COMPRESSION);
-                $calcDataCompress = $this->_repoBonusService
+                $calcTypeIdCompress = $this->repoBonusTypeCalc->getIdByCode(Cfg::CODE_TYPE_CALC_COMPRESSION);
+                $calcDataCompress = $this->repoBonusService
                     ->getLastCalcForPeriodByDates($calcTypeIdCompress, $dsBegin, $dsEnd);
                 $calcIdCompress = $calcDataCompress->getId();
-                $params = $this->_repoMod->getConfigParams();
-                $treeCompressed = $this->_repoMod->getCompressedTreeWithQualifications($calcIdCompress);
-                $pvTotal = $this->_repoMod->getSalesOrdersPvForPeriod($dsBegin, $dsEnd);
+                $params = $this->repoMod->getConfigParams();
+                $treeCompressed = $this->repoMod->getCompressedTreeWithQualifications($calcIdCompress);
+                $pvTotal = $this->repoMod->getSalesOrdersPvForPeriod($dsBegin, $dsEnd);
                 /* calculate bonus */
-                $updates = $this->_subBonus->calc($treeCompressed, $pvTotal, $params);
+                $updates = $this->subBonus->calc($treeCompressed, $pvTotal, $params);
                 /* create new operation with bonus transactions and save sales log */
                 $respAdd = $this->_createBonusOperation($updates);
                 $transLog = $respAdd->getTransactionsIds();
-                $this->_repoMod->saveLogRanks($transLog);
+                $this->repoMod->saveLogRanks($transLog);
                 /* mark calculation as completed and finalize bonus */
-                $this->_repoBonusService->markCalcComplete($calcIdDepend);
-                $this->_manTrans->commit($def);
+                $this->repoBonusService->markCalcComplete($calcIdDepend);
+                $this->manTrans->commit($def);
                 $result->setPeriodId($periodDataDepend->getId());
                 $result->setCalcId($calcIdDepend);
                 $result->markSucceed();
             } finally {
-                $this->_manTrans->end($def);
+                $this->manTrans->end($def);
             }
         }
         $this->logger->info("'Global Sales Bonus' calculation is complete.");
@@ -173,9 +155,9 @@ class Call
         $calcType = Cfg::CODE_TYPE_CALC_QUALIFICATION;
         $reqGetPeriod->setBaseCalcTypeCode($calcTypeBase);
         $reqGetPeriod->setDependentCalcTypeCode($calcType);
-        $respGetPeriod = $this->_callBasePeriod->getForDependentCalc($reqGetPeriod);
+        $respGetPeriod = $this->callBasePeriod->getForDependentCalc($reqGetPeriod);
         if ($respGetPeriod->isSucceed()) {
-            $def = $this->_manTrans->begin();
+            $def = $this->manTrans->begin();
             try {
                 $periodDataDepend = $respGetPeriod->getDependentPeriodData();
                 $calcDataDepend = $respGetPeriod->getDependentCalcData();
@@ -184,18 +166,18 @@ class Call
                 $dsBegin = $periodDataDepend->getDstampBegin();
                 $dsEnd = $periodDataDepend->getDstampEnd();
                 $calcIdBase = $calcDataBase->getId();
-                $tree = $this->_repoBonusCompress->getTreeByCalcId($calcIdBase);
-                $qualData = $this->_repoMod->getQualificationData($dsBegin, $dsEnd);
-                $cfgParams = $this->_repoMod->getConfigParams();
-                $updates = $this->_subQualification->calcParams($tree, $qualData, $cfgParams, $gvMaxLevels);
-                $this->_repoMod->saveQualificationParams($updates);
-                $this->_repoBonusService->markCalcComplete($calcIdDepend);
-                $this->_manTrans->commit($def);
+                $tree = $this->repoBonusCompress->getTreeByCalcId($calcIdBase);
+                $qualData = $this->repoMod->getQualificationData($dsBegin, $dsEnd);
+                $cfgParams = $this->repoMod->getConfigParams();
+                $updates = $this->subQualification->calcParams($tree, $qualData, $cfgParams, $gvMaxLevels);
+                $this->repoMod->saveQualificationParams($updates);
+                $this->repoBonusService->markCalcComplete($calcIdDepend);
+                $this->manTrans->commit($def);
                 $result->setPeriodId($periodDataDepend->getId());
                 $result->setCalcId($calcIdDepend);
                 $result->markSucceed();
             } finally {
-                $this->_manTrans->end($def);
+                $this->manTrans->end($def);
             }
         }
         $this->logger->info("'Qualification for Global Sales' calculation is complete.");

@@ -10,6 +10,6 @@ namespace Praxigento\Bonus\GlobalSales\Lib\Service\Calc\Response;
  * @method int getPeriodId()
  * @method void setPeriodId(int $data)
  */
-class Qualification extends \Praxigento\Core\App\Service\Base\Response {
+class Qualification extends \Praxigento\Core\App\Service\Response {
 
 }
